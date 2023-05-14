@@ -13,11 +13,11 @@ type Props = {
 export default function Card({ id,title, description, large }: Props) {
   return (
     <div
-      className={`relative col-span-1 h-64 overflow-hidden rounded-xl border border-gray-200 bg-white py-2 shadow-md ${
+      className={`relative p-4 col-span-1 h-64 overflow-hidden rounded-xl border border-gray-200 bg-white py-2 shadow-md ${
         large ? "md:col-span-2" : ""
       }`}
     >
-      <div className="max-w-md mx-auto text-center">
+      <div className="mx-auto text-center ">
         <h2 className="text-xl font-bold text-transparent bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display md:text-3xl md:font-normal">
           <Balancer>{title}</Balancer>
         </h2>

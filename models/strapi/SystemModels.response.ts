@@ -1,3 +1,6 @@
+import { WindowModelsEnum } from "../windowPVC.model";
+import { Meta } from "./Global.response";
+
 export type SystemModelsResponseI = {
     data: Data;
     meta: Meta;
@@ -21,18 +24,16 @@ export type WindowModels = {
     data: Datum[];
 }
 
-export type Datum = {
+type Datum = {
     id:         number;
     attributes: DatumAttributes;
 }
 
-export type DatumAttributes = {
-    name:        string;
+ type DatumAttributes = {
+    name: string;
+    draw_ref: WindowModelsEnum
     createdAt:   Date;
     updatedAt:   Date;
     publishedAt: Date;
-}
-
-export type Meta = {
 }
 

@@ -1,3 +1,4 @@
+import { WindowModelsEnum } from "../windowPVC.model";
 import { Meta } from "./Global.response";
 
 export type ModelResponseT = {
@@ -12,6 +13,7 @@ type ModelData = {
 
 type ModelAttributes = {
   name: string;
+  draw_ref: WindowModelsEnum;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;

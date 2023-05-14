@@ -5,12 +5,14 @@
     "allowJs": true,
     "skipLibCheck": true,
     "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types"],
     "paths": {
       "@/components/*": ["components/*"],
       "@/pages/*": ["pages/*"],
       "@/app/*": ["app/*"],
       "@/lib/*": ["lib/*"],
-      "@/styles/*": ["styles/*"]
+      "@/styles/*": ["styles/*"],
+      "@/models/*": ["models/*"]
     },
     "strict": true,
     "forceConsistentCasingInFileNames": true,
