@@ -14,25 +14,45 @@ export interface QuoteItemWithQuantityI {
 
 interface InitialState {
   quoteState: QuoteItemWithQuantityI[];
+  currentWindow: CurrentWindowI;
+}
+
+interface CurrentWindowI {
+  reference: string;
+  location: string;
+  width: number;
+  height: number;
+  glassId: number | null;
 }
 
 const initialState: InitialState = {
   quoteState: [],
+  currentWindow: {
+    reference: "V1",
+    location: "Alcoba",
+    width: 1000,
+    height: 100,
+    glassId: null,
+  },
 };
 
 export const quoteSlice = createSlice({
   name: "quote",
   initialState,
   reducers: {
-      addWindowToQuote: (state, action) => {
-          state.quoteState.push(action.payload)
+    addWindowToQuote: (state, action) => {
+      state.quoteState.push(action.payload);
     },
+    setWindowLocation: (state, action) => {
+      state.currentWindow.location = action.payload;
+    }
   },
 });
 
-
-export const { addWindowToQuote } = quoteSlice.actions;
-export const selectCountQuoteItems = (state: AppState) => state.quote.quoteState.length;
+export const { addWindowToQuote, setWindowLocation } = quoteSlice.actions;
+export const selectCountQuoteItems = (state: AppState) =>
+  state.quote.quoteState.length;
+export const selectCurrentWindow = (state:AppState) => state.quote.currentWindow
 export default quoteSlice.reducer;
 /* 
 

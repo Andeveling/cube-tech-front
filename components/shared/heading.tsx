@@ -8,7 +8,7 @@ const Heading = ({ children, as = "h1" }: Props) => {
     case "h1":
       return (
         <h1
-          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-7xl md:leading-[5rem]"
+          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm"
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
           {children}
@@ -17,7 +17,7 @@ const Heading = ({ children, as = "h1" }: Props) => {
     case "h2":
       return (
         <h2
-          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-3xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-7xl md:leading-[5rem]"
+          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-3xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm "
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
           {children}
@@ -26,7 +26,7 @@ const Heading = ({ children, as = "h1" }: Props) => {
     case "h3":
       return (
         <h3
-          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-2xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-7xl md:leading-[5rem]"
+          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-2xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm "
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
           {children}
@@ -35,7 +35,7 @@ const Heading = ({ children, as = "h1" }: Props) => {
     case "h4":
       return (
         <h4
-          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-7xl md:leading-[5rem]"
+          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm "
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
           {children}
@@ -44,7 +44,7 @@ const Heading = ({ children, as = "h1" }: Props) => {
     case "h5":
       return (
         <h5
-          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-lg font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-7xl md:leading-[5rem]"
+          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-lg font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm "
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
           {children}
@@ -53,7 +53,7 @@ const Heading = ({ children, as = "h1" }: Props) => {
     case "h6":
       return (
         <h6
-          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-base font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-7xl md:leading-[5rem]"
+          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-base font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm "
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
           {children}

@@ -1,6 +1,7 @@
-import { RadioGroup, Tab } from "@headlessui/react";
+"use client";
+import { RadioGroup } from "@headlessui/react";
 import Image from "next/image";
-import { SVGProps, useState } from "react";
+import { useState } from "react";
 
 export const StepThree = () => {
   const [selected, setSelected] = useState(plans[0]);
@@ -87,7 +88,7 @@ export const StepThree = () => {
   );
 };
 
-function CheckIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
+function CheckIcon(props: any) {
   return (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <circle cx={12} cy={12} r={12} fill="#fff" opacity="0.2" />
