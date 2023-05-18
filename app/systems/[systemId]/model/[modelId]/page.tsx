@@ -5,8 +5,10 @@ import { StepThree } from "@/components/models/modelForm/stepper/StepThree";
 import { StepTwo } from "@/components/models/modelForm/stepper/StepTwo";
 import { WindowCreateStepper } from "@/components/models/modelForm/stepper/WindowCreateStepper";
 import { WindowPVCDraw } from "@/components/models/modelForm/WindowPVCDraw";
+import Heading from "@/components/shared/heading";
 import { arqustikConfig } from "@/lib/constants";
 import { ModelResponseT } from "models/strapi/windowModel.response";
+import { Suspense } from "react";
 
 type Params = { params: { modelId: string } };
 
@@ -24,16 +26,28 @@ export default async function SystemPage({ params: { modelId } }: Params) {
 
   return (
     <div className="container w-full h-full mx-auto">
-      <h2 className="my-2 text-6xl text-center">Diseno</h2>
-      <div className="grid grid-cols-2 gap-4 p-2">
-        <WindowPVCDraw model={model.data.attributes.draw_ref} />
+     
+      <Heading>Diseño</Heading>
+      <p
+        className="mb-10 text-center text-gray-500 opacity-0 animate-fade-up md:text-2xl"
+        style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
+      >
+        Configura tu ventana.
+      </p>
+      <div className="grid justify-center w-full grid-cols-1 gap-4 p-2 md:grid-cols-2 ">
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <WindowPVCDraw model={model.data.attributes.draw_ref} />
+        </Suspense>
         {/* Este componente tiene problemas para implementar un formulario controlado */}
         {/* <CreateWindowForm/> */}
-        <StepperProvider
-          steps={[<StepOne />, <StepTwo />, <StepThree />, <StepFour />]}
-        >
-          <WindowCreateStepper />
-        </StepperProvider>
+
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <StepperProvider
+            steps={[<StepOne />, <StepTwo />, <StepThree />, <StepFour />]}
+          >
+            <WindowCreateStepper />
+          </StepperProvider>
+        </Suspense>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 export const WindowPVCDraw = ({ model }: { model: WindowModelsEnum }) => {
   const { reference, location } = useSelector(selectCurrentWindow);
   return (
-    <div className="flex flex-col items-center justify-center h-[600px] w-[600px]">
+    <div className="flex flex-col items-center justify-center mx-auto h-[600px] w-[600px]">
       <h2 className="mb-3 text-2xl">
         {reference} | {location}
       </h2>

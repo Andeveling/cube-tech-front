@@ -4,7 +4,10 @@ import {
   selectCurrentWindow,
   setWindowLocation,
 } from "@/lib/redux/quoteDocument/quoteSlice";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { HandleStepper } from "./HandleStepper";
+import { StepperContext } from "./StepperContext";
 
 type FormData = {
   location: string;
@@ -13,37 +16,48 @@ type FormData = {
 export const StepOne = () => {
   const dispatch = useAppDispatch();
   const { location } = useAppSelector(selectCurrentWindow);
-  const { handleSubmit, register, watch } = useForm<FormData>();
-
-  const onSubmit = (data: FormData) =>
+  const { handleSubmit, register } = useForm<FormData>();
+  const { handleNext } = useContext(StepperContext);
+  const onSubmit = (data: FormData) => {
     dispatch(setWindowLocation(data.location));
+    handleNext();
+  };
+
   return (
-    <div className="grid justify-center h-full grid-cols-1 place-content-center">
-      <div id="location">
-        <h2 className="text-2xl font-semibold">Ubicacion</h2>
-        <p className="text-xl">En que lugar ira tu ventana?</p>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="w-full max-w-sm form-control">
+    <div className="justify-center w-full h-full text-center ">
+      <div id="location" className="h-full grid-flow-row grid-cols-1 ">
+        <div className="h-20 text-center">
+          <h2 className="text-2xl font-semibold">Ubicacion</h2>
+          <p className="text-xl">En que lugar ira tu ventana?</p>
+        </div>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col justify-center w-full "
+        >
+          <div className="w-full h-full max-w-sm mx-auto form-control min-h-[300px]">
             <label className="label">
               <span className="text-xl label-text">Ubicacion</span>
               <span className="label-text-alt">Seleciona una opcion</span>
             </label>
             <select
-              className="w-full text-xl select select-bordered"
+              className="select select-bordered"
               {...register("location")}
             >
               {locations.map((item) => {
-                if(item !== location) return (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                );
+                if (item !== location)
+                  return (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  );
               })}
             </select>
+            {/* <label className="label">
+              <span className="label-text-alt">Alt label</span>
+              <span className="label-text-alt">Alt label</span>
+            </label> */}
           </div>
-          <button type="submit" className="btn btn-info">
-            Save
-          </button>
+          <HandleStepper />
         </form>
       </div>
     </div>

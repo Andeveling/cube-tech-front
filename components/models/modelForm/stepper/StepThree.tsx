@@ -1,16 +1,51 @@
 "use client";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/use-store-hooks";
+import {
+  selectCurrentWindow,
+  setWindowGlassId,
+} from "@/lib/redux/quoteDocument/quoteSlice";
 import { RadioGroup } from "@headlessui/react";
+import { Label } from "@headlessui/react/dist/components/label/label";
+import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import { HandleStepper } from "./HandleStepper";
+import { StepperContext } from "./StepperContext";
+
+type FormData = {
+  glassId: string;
+};
 
 export const StepThree = () => {
-  const [selected, setSelected] = useState(plans[0]);
+  const dispatch = useAppDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+  const windowCurrent = useAppSelector(selectCurrentWindow);
+  const { handleNext } = useContext(StepperContext);
+  const onSubmit = ({ glassId }: FormData) => {
+    dispatch(setWindowGlassId(glassId));
+    handleNext();
+    console.log(windowCurrent);
+  };
+
   return (
     <div>
-      <div id="cristal" className="p-10">
-        <span>Selecciona un tipo de vidrio</span>
+      <div id="cristal">
+        <div className="h-20 text-center">
+          <h2 className="text-2xl font-semibold">Cristal</h2>
+          <p className="text-xl">Que solucion necesitas?</p>
+        </div>
 
-        <RadioGroup value={selected} onChange={setSelected} className="w-full">
+        {/* <RadioGroup
+          value={selected}
+          onChange={setSelected}
+          className="w-full"
+          {...register("glassId")}
+        >
           <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
           <div className="space-y-2">
             {plans.map((plan) => (
@@ -67,6 +102,10 @@ export const StepThree = () => {
                               </span>{" "}
                               <span aria-hidden="true">&middot;</span>{" "}
                               <span>{plan.disk}</span>
+                              <p>
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Quae quibusdam quasi animi.
+                              </p>
                             </RadioGroup.Description>
                           </div>
                         </div>
@@ -82,8 +121,46 @@ export const StepThree = () => {
               </RadioGroup.Option>
             ))}
           </div>
-        </RadioGroup>
+        </RadioGroup> */}
       </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <label>
+            <input
+              type="radio"
+              {...register("glassId", { required: true })}
+              value="1"
+              className="radio radio-primary"
+            />
+            Simple
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="radio"
+              {...register("glassId", { required: true })}
+              value="2"
+              className="radio radio-primary"
+            />
+            Acustico
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="radio"
+              {...register("glassId", { required: true })}
+              value="3"
+              className="radio radio-primary"
+            />
+            Termo-Acustico
+          </label>
+        </div>
+        {errors.glassId && <span>Please select an option</span>}
+
+        <HandleStepper />
+      </form>
     </div>
   );
 };
@@ -103,7 +180,36 @@ function CheckIcon(props: any) {
   );
 }
 
-const cristals = [{ name: "Simple", caliber: "4 mm" }];
+const cristals = [
+  {
+    name: "Simple | Monolitico",
+    caliber: "4 mm",
+    description:
+      "El vidrio monolítico es una sola lámina de vidrio que se forma mediante el proceso de fabricación de vidrio flotado.",
+    features: ["Economico", "Liviano"],
+  },
+  {
+    name: "Simple Templado | Monolitico",
+    caliber: "5 mm",
+    description:
+      "El vidrio monolítico templado es una sola lámina de vidrio reforzado mediante el proceso templado de fabricación de vidrio flotado.",
+    features: ["Economico", "Liviano", "Seguridad media"],
+  },
+  {
+    name: "Acustico | Laminado",
+    caliber: "11mm",
+    description:
+      "El vidrio laminado ha transformado la industria ya que es capaz de proporcionar durabilidad, alto desempeño y beneficios multi-funcionales tales como seguridad, control del ruido;  así como resistencia a huracanes y terremotos al mismo tiempo que preserva la estética del vidrio.",
+    features: ["Seguridad", "Acustico"],
+  },
+  {
+    name: "Termo-Acustico | Insulado",
+    caliber: "11mm",
+    description:
+      "El vidrio insulado de Tecnoglass ahorra energía en cualquier casa o edificio, mejorando el rendimiento térmico de las ventanas. Este producto crea un ambiente interior más cómodo evitando temperaturas extremas y reduce los costos de calefacción y aire acondicionado de manera significativa.",
+    features: ["Seguridad", "Acustico"],
+  },
+];
 
 const plans = [
   {

@@ -23,6 +23,7 @@ interface CurrentWindowI {
   width: number;
   height: number;
   glassId: number | null;
+  quantity: number;
 }
 
 const initialState: InitialState = {
@@ -31,8 +32,9 @@ const initialState: InitialState = {
     reference: "V1",
     location: "Alcoba",
     width: 1000,
-    height: 100,
+    height: 1000,
     glassId: null,
+    quantity: 1,
   },
 };
 
@@ -45,14 +47,35 @@ export const quoteSlice = createSlice({
     },
     setWindowLocation: (state, action) => {
       state.currentWindow.location = action.payload;
+    },
+    setWindowDimensions: (state, action) => {
+      state.currentWindow.width = action.payload.width;
+      state.currentWindow.height = action.payload.height;
+    },
+    setWindowQuantity: (state, action) => {
+      state.currentWindow.quantity = action.payload;
+    },
+    setWindowGlassId: (state, action) => {
+      state.currentWindow.glassId = action.payload
     }
   },
 });
 
-export const { addWindowToQuote, setWindowLocation } = quoteSlice.actions;
+/* Actions */
+export const {
+  addWindowToQuote,
+  setWindowLocation,
+  setWindowDimensions,
+  setWindowQuantity,
+  setWindowGlassId,
+} = quoteSlice.actions;
+/* Selectors */
 export const selectCountQuoteItems = (state: AppState) =>
   state.quote.quoteState.length;
-export const selectCurrentWindow = (state:AppState) => state.quote.currentWindow
+export const selectCurrentWindow = (state: AppState) =>
+  state.quote.currentWindow;
+
+  /* Reducer */
 export default quoteSlice.reducer;
 /* 
 
