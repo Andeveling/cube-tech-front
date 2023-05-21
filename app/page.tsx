@@ -1,6 +1,6 @@
 import Card from "@/components/home/card";
 import { arqustikConfig } from "@/lib/constants";
-import Counter from "@/lib/redux/counter/Counter";
+import Counter from "@/lib/redux/features/counter/Counter";
 import { SystemsResponseT } from "models/strapi/Systems.response";
 import Balancer from "react-wrap-balancer";
 
@@ -38,7 +38,7 @@ export default async function Home() {
           />
         ))}
       </div>
-      {/* <Counter/> */}
+    
     </div>
   );
 }

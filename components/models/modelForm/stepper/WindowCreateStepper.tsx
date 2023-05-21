@@ -1,7 +1,7 @@
 "use client";
 import { useContext } from "react";
 
-import { selectCurrentWindow } from "@/lib/redux/quoteDocument/quoteSlice";
+import { selectCurrentWindow } from "@/lib/redux/features/quoteDocument/quoteSlice";
 import { SubmitHandler } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { StepperContext } from "./StepperContext";

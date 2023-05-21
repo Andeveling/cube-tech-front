@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { useAppSelector, useAppDispatch } from "../../hooks/use-store-hooks";
+import { useAppSelector, useAppDispatch } from "../../../hooks/use-store-hooks";
 import {
   decrement,
   increment,

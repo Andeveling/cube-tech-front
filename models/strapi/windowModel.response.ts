@@ -14,6 +14,10 @@ type ModelData = {
 type ModelAttributes = {
   name: string;
   draw_ref: WindowModelsEnum;
+  minH: number;
+  minW: number;
+  maxH: number;
+  maxW: number;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;

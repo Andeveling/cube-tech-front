@@ -1,6 +1,6 @@
 import Footer from "@/components/layout/footer";
 import Nav from "@/components/layout/nav";
-import { Providers } from "@/components/shared/provider";
+import { Providers } from "@/lib/redux/provider";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { Suspense } from "react";
@@ -22,11 +22,11 @@ export const metadata = {
   themeColor: "#FFF",
 };
 
-export default async function RootLayout({
-  children,
-}: {
+type Props = {
   children: React.ReactNode;
-}) {
+};
+
+export default async function RootLayout({ children }: Props) {
   return (
     <html lang="en" data-theme="lofi">
       <body className={cx(sfPro.variable, inter.variable)}>
@@ -36,9 +36,7 @@ export default async function RootLayout({
             {/* @ts-expect-error Server Component */}
             <Nav />
           </Suspense>
-          <main className="w-full min-h-screen py-32">
-            {children}
-          </main>
+          <main className="w-full min-h-screen py-32">{children}</main>
           <Footer />
           <Analytics />
         </Providers>

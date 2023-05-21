@@ -1,11 +1,12 @@
 "use client";
 import WindowDraw from "@/components/shared/models-windows-pvc/window-draw";
-import { selectCurrentWindow } from "@/lib/redux/quoteDocument/quoteSlice";
+import { useAppSelector } from "@/lib/hooks/use-store-hooks";
+import { selectCurrentWindow } from "@/lib/redux/features/quoteDocument/quoteSlice";
 import { WindowModelsEnum } from "@/models/windowPVC.model";
-import { useSelector } from "react-redux";
+
 
 export const WindowPVCDraw = ({ model }: { model: WindowModelsEnum }) => {
-  const { reference, location } = useSelector(selectCurrentWindow);
+  const { reference, location } = useAppSelector(selectCurrentWindow);
   return (
     <div className="flex flex-col items-center justify-center mx-auto h-[600px] w-[600px]">
       <h2 className="mb-3 text-2xl">

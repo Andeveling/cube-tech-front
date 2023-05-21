@@ -5,13 +5,14 @@ import {
   setWindowDimensions,
   setWindowLocation,
   setWindowQuantity,
-} from "@/lib/redux/quoteDocument/quoteSlice";
+} from "@/lib/redux/features/quoteDocument/quoteSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { HandleStepper } from "./HandleStepper";
 import { StepperContext } from "./StepperContext";
 import * as yup from "yup";
+import Heading from "@/components/shared/heading";
 
 type FormData = {
   width: number;
@@ -19,10 +20,31 @@ type FormData = {
   quantity: number;
 };
 
-export const StepTwo = () => {
+type DimensionsData = {
+  minH: number;
+  maxH: number;
+  minW: number;
+  maxW: number;
+};
+
+export const StepTwoDimensions = ({
+  minH,
+  minW,
+  maxH,
+  maxW,
+}: DimensionsData) => {
+  const CreateWindowSchema = yup.object().shape({
+    width: yup.number().positive().min(minW).max(maxW).required(),
+    height: yup.number().positive().min(minH).max(maxH).required(),
+    quantity: yup.number().positive().min(1).max(12).required().typeError('Introduce algun valor numerico'),
+  });
   const dispatch = useAppDispatch();
   const { width, height, quantity } = useAppSelector(selectCurrentWindow);
-  const { register, handleSubmit } = useForm<FormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
     resolver: yupResolver(CreateWindowSchema),
     defaultValues: { width, height, quantity },
   });
@@ -35,8 +57,8 @@ export const StepTwo = () => {
   return (
     <div className="w-full h-full">
       <div className="text-center">
-        <h2 className="text-2xl font-semibold">Medidas</h2>
-        <p className="text-xl">Que medidas tiene el vano?</p>
+        <Heading as="h2">Dimensiones</Heading>
+        <p className="text-xl animate-fade-up">¿Qué medidas tiene el vano?</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -53,9 +75,15 @@ export const StepTwo = () => {
               {...register("width")}
             />
             <label className="label">
-              <span className="label-text-alt">Min : 750mm | Max : 1000mm</span>
-              {/*       <span className="label-text-alt">Bottom Right label</span> */}
+              <span className="label-text-alt">
+                Min : {minW}mm | Max : {maxW}mm
+              </span>
             </label>
+            {errors.width && (
+              <span className="label-text-alt text-error">
+                * {errors.width.message}
+              </span>
+            )}
           </div>
 
           {/*Alto  */}
@@ -71,12 +99,15 @@ export const StepTwo = () => {
               {...register("height")}
             />
             <label className="label">
-              <span className="label-text-alt">Min : 750mm | Max : 1000mm</span>
+              <span className="label-text-alt">
+                Min : {minH}mm | Max : {maxH}mm
+              </span>
             </label>
-            {/*     <label className="label">
-          <span className="label-text-alt">Bottom Left label</span>
-          <span className="label-text-alt">Bottom Right label</span>
-        </label> */}
+            {errors.height && (
+              <span className="label-text-alt text-error">
+                * {errors.height.message}
+              </span>
+            )}
           </div>
           {/*Alto  */}
           <div className="w-full my-1 form-control ">
@@ -93,6 +124,11 @@ export const StepTwo = () => {
             <label className="label">
               <span className="label-text-alt">Min : 1 | Max : 12</span>
             </label>
+            {errors.quantity && (
+              <span className="label-text-alt text-error">
+                * {errors.quantity.message}
+              </span>
+            )}
           </div>
         </div>
         <HandleStepper />
@@ -100,9 +136,3 @@ export const StepTwo = () => {
     </div>
   );
 };
-
-const CreateWindowSchema = yup.object().shape({
-  width: yup.number().positive().min(300).max(2000).required(),
-  height: yup.number().positive().min(300).max(2000).required(),
-  quantity: yup.number().positive().min(1).max(12).required(),
-});

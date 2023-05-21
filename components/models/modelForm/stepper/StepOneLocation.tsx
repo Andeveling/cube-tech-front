@@ -1,9 +1,10 @@
 "use client";
+import Heading from "@/components/shared/heading";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/use-store-hooks";
 import {
   selectCurrentWindow,
   setWindowLocation,
-} from "@/lib/redux/quoteDocument/quoteSlice";
+} from "@/lib/redux/features/quoteDocument/quoteSlice";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { HandleStepper } from "./HandleStepper";
@@ -13,7 +14,7 @@ type FormData = {
   location: string;
 };
 
-export const StepOne = () => {
+export const StepOneLocation = () => {
   const dispatch = useAppDispatch();
   const { location } = useAppSelector(selectCurrentWindow);
   const { handleSubmit, register } = useForm<FormData>();
@@ -27,17 +28,19 @@ export const StepOne = () => {
     <div className="justify-center w-full h-full text-center ">
       <div id="location" className="h-full grid-flow-row grid-cols-1 ">
         <div className="h-20 text-center">
-          <h2 className="text-2xl font-semibold">Ubicacion</h2>
-          <p className="text-xl">En que lugar ira tu ventana?</p>
+          <Heading as="h2">Ubicación</Heading>
+          <p className="text-xl animate-fade-up">
+            ¿En qué lugar irá tu ventana?
+          </p>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col justify-center w-full "
+          className="flex flex-col justify-center w-full"
         >
-          <div className="w-full h-full max-w-sm mx-auto form-control min-h-[300px]">
+          <div className="w-full h-full max-w-lg mx-auto form-control min-h-[300px]">
             <label className="label">
-              <span className="text-xl label-text">Ubicacion</span>
-              <span className="label-text-alt">Seleciona una opcion</span>
+              <span className="text-xl label-text">Ubicación</span>
+              <span className="label-text-alt">Selecciona una opción</span>
             </label>
             <select
               className="select select-bordered"
@@ -52,10 +55,6 @@ export const StepOne = () => {
                   );
               })}
             </select>
-            {/* <label className="label">
-              <span className="label-text-alt">Alt label</span>
-              <span className="label-text-alt">Alt label</span>
-            </label> */}
           </div>
           <HandleStepper />
         </form>
