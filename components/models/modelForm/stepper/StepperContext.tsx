@@ -6,7 +6,6 @@ import {
   SetStateAction,
   useState,
 } from "react";
-import { JsxElement } from "typescript";
 
 type StepperContextT = {
   currentStep: number;
@@ -27,8 +26,8 @@ type StepperProps = {
 
 const StepperProvider = ({ children, steps }: StepperProps) => {
   const allSteps = steps;
-    const [currentStep, setCurrentStep] = useState<number>(0);
-    
+  const [currentStep, setCurrentStep] = useState<number>(0);
+
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
