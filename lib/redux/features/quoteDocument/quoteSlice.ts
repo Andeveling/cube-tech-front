@@ -1,105 +1,66 @@
 import { AppState } from "@/lib/store/store";
 import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { CreateWindowDataI } from "../createWindow/createWindowSlice";
+import { v4 as uuid } from "uuid";
 
 export interface QuoteItemI {
   id: string;
-  price: number;
-}
-export type QuantityT = number;
-
-export interface QuoteItemWithQuantityI {
-  item: QuoteItemI;
-  quantity: QuantityT;
+  item: CreateWindowDataI;
 }
 
 interface InitialState {
-  quoteState: QuoteItemWithQuantityI[];
-  currentWindow: CurrentWindowI;
-}
-
-interface CurrentWindowI {
-  reference: string;
-  location: string;
-  width: number;
-  height: number;
-  glassId: number | null;
-  quantity: number;
+  quoteState: QuoteItemI[];
 }
 
 const initialState: InitialState = {
   quoteState: [],
-  currentWindow: {
-    reference: "V1",
-    location: "Alcoba",
-    width: 1000,
-    height: 1000,
-    glassId: null,
-    quantity: 1,
-  },
 };
 
 export const quoteSlice = createSlice({
   name: "quote",
   initialState,
   reducers: {
-    addWindowToQuote: (state, action) => {
-      state.quoteState.push(action.payload);
+    addWindowToQuote: (state, action: PayloadAction<CreateWindowDataI>) => {
+      const newWindowData: CreateWindowDataI = action.payload;
+      const newWindow: QuoteItemI = {
+        id: uuid(),
+        item: newWindowData,
+      };
+      state.quoteState.push(newWindow);
     },
-    setWindowLocation: (state, action) => {
-      state.currentWindow.location = action.payload;
+    removeWindowFromQuote: (state, action: PayloadAction<QuoteItemI["id"]>) => {
+      const id = action.payload;
+      state.quoteState = state.quoteState.filter((item) => item.id !== id);
     },
-    setWindowDimensions: (state, action) => {
-      state.currentWindow.width = action.payload.width;
-      state.currentWindow.height = action.payload.height;
+    incrementQuantity: (state, action: PayloadAction<QuoteItemI["id"]>) => {
+      const id = action.payload;
+      const windowItem = state.quoteState.find((item) => item.id === id);
+      if (windowItem) {
+        windowItem.item.quantity += 1;
+      }
     },
-    setWindowQuantity: (state, action) => {
-      state.currentWindow.quantity = action.payload;
+    decrementQuantity: (state, action: PayloadAction<QuoteItemI["id"]>) => {
+      const id = action.payload;
+      const windowItem = state.quoteState.find((item) => item.id === id);
+      if (windowItem && windowItem.item.quantity > 1) {
+        windowItem.item.quantity -= 1;
+      }
     },
-    setWindowGlassId: (state, action) => {
-      state.currentWindow.glassId = action.payload
-    }
   },
 });
 
 /* Actions */
 export const {
   addWindowToQuote,
-  setWindowLocation,
-  setWindowDimensions,
-  setWindowQuantity,
-  setWindowGlassId,
+  removeWindowFromQuote,
+  incrementQuantity,
+  decrementQuantity,
 } = quoteSlice.actions;
 /* Selectors */
+export const selectQuoteItems = (state: AppState) => state.quote.quoteState;
 export const selectCountQuoteItems = (state: AppState) =>
   state.quote.quoteState.length;
-export const selectCurrentWindow = (state: AppState) =>
-  state.quote.currentWindow;
 
-  /* Reducer */
+/* Reducer */
 export default quoteSlice.reducer;
-/* 
-
-  switch (type) {
-    case "add":
-      const newState = {
-        ...state,
-        [item.id]: { ...item },
-      };
-      return newState;
-
-    case "remove": {
-      if (existingCartItem == undefined) {
-        return state;
-      }
-
-      const newCartItems = { ...state };
-      delete newCartItems[item.id];
-      return newCartItems;
-    }
-
-    default: {
-      throw new Error(`Unhandled action type: ${type}`);
-    }
-  }
-
-*/

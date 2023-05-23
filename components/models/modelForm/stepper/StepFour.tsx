@@ -1,11 +1,13 @@
 "use client";
 import Heading from "@/components/shared/heading";
 import { useAppSelector } from "@/lib/hooks/use-store-hooks";
-import { selectCurrentWindow } from "@/lib/redux/features/quoteDocument/quoteSlice";
+import { selectCurrentWindow } from "@/lib/redux/features/createWindow/createWindowSlice";
+import { selectQuoteItems } from "@/lib/redux/features/quoteDocument/quoteSlice";
 import { HandleStepper } from "./HandleStepper";
 
 export const StepFour = () => {
   const currentWindow = useAppSelector(selectCurrentWindow);
+
   return (
     <div className="flex flex-col justify-center w-full">
       <Heading as="h3">Resumen</Heading>

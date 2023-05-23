@@ -6,6 +6,7 @@ import cx from "classnames";
 import { Suspense } from "react";
 import { inter, sfPro } from "./fonts";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Arqustik - Soluciones termoacusticas en tus ventanas",
@@ -40,6 +41,7 @@ export default async function RootLayout({ children }: Props) {
           <Footer />
           <Analytics />
         </Providers>
+        <Toaster position="bottom-right" reverseOrder={false} />
       </body>
     </html>
   );

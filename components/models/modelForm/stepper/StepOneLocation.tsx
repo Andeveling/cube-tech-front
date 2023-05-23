@@ -4,7 +4,10 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks/use-store-hooks";
 import {
   selectCurrentWindow,
   setWindowLocation,
-} from "@/lib/redux/features/quoteDocument/quoteSlice";
+  generateReference,
+} from "@/lib/redux/features/createWindow/createWindowSlice";
+import { selectCountQuoteItems } from "@/lib/redux/features/quoteDocument/quoteSlice";
+
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { HandleStepper } from "./HandleStepper";
@@ -17,10 +20,13 @@ type FormData = {
 export const StepOneLocation = () => {
   const dispatch = useAppDispatch();
   const { location } = useAppSelector(selectCurrentWindow);
+  const countItemsCount = useAppSelector(selectCountQuoteItems); 
   const { handleSubmit, register } = useForm<FormData>();
   const { handleNext } = useContext(StepperContext);
   const onSubmit = (data: FormData) => {
     dispatch(setWindowLocation(data.location));
+    dispatch(generateReference(countItemsCount));
+
     handleNext();
   };
 

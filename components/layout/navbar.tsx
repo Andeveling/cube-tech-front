@@ -1,6 +1,6 @@
 "use client";
 import useScroll from "@/lib/hooks/use-scroll";
-import { QuoteDocument } from "@/lib/redux/features/quoteDocument/Quote";
+import { QuoteDocument } from "@/components/layout/Quote";
 import Image from "next/image";
 import Link from "next/link";
 

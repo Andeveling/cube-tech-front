@@ -1,20 +1,32 @@
-import { configureStore, ThunkAction, Action, Store } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  ThunkAction,
+  Action,
+  Store,
+} from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { apiSlice } from "../redux/services/api.service";
-
+import createWindowReducer from "../redux/features/createWindow/createWindowSlice";
 import counterReducer from "../redux/features/counter/counterSlice";
 import quoteReducer from "../redux/features/quoteDocument/quoteSlice";
 import { createWrapper } from "next-redux-wrapper";
+import { persistedState, localStorageMiddleware } from "./middlwares";
+
+
 
 export function makeStore() {
   return configureStore({
     reducer: {
       counter: counterReducer,
       quote: quoteReducer,
+      createWindow: createWindowReducer,
       [apiSlice.reducerPath]: apiSlice.reducer,
     },
+    preloadedState: persistedState,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat([apiSlice.middleware]),
+      getDefaultMiddleware()
+        .concat([apiSlice.middleware])
+        .concat(localStorageMiddleware),
   });
 }
 

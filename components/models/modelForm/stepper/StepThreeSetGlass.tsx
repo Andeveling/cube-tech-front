@@ -1,10 +1,8 @@
 "use client";
 import Heading from "@/components/shared/heading";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/use-store-hooks";
-import {
-  selectCurrentWindow,
-  setWindowGlassId,
-} from "@/lib/redux/features/quoteDocument/quoteSlice";
+import { selectCurrentWindow, setWindowGlassId } from "@/lib/redux/features/createWindow/createWindowSlice";
+
 import {
   GlassCategoriesResponseT,
   GlassType,

@@ -1,10 +1,25 @@
 "use client";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/use-store-hooks";
+import { selectCurrentWindow,resetWindowState } from "@/lib/redux/features/createWindow/createWindowSlice";
+import { addWindowToQuote } from "@/lib/redux/features/quoteDocument/quoteSlice";
+import Link from "next/link";
 import { useContext } from "react";
 import { StepperContext } from "./StepperContext";
+import toast from "react-hot-toast";
 
-export const HandleStepper = ({ finalStep }: { finalStep?: boolean }) => {
-  const { handleBack, currentStep, allSteps } =
+const notify = () => toast.success("Ventana creada.");
+
+export const HandleStepper = () => {
+  const { handleBack, currentStep, allSteps, setCurrentStep } =
     useContext(StepperContext);
+  const currentWindowCreate = useAppSelector(selectCurrentWindow);
+  const dispatch = useAppDispatch();
+  const handleWindowCreated = () => {
+    notify();
+    dispatch(addWindowToQuote(currentWindowCreate));
+    dispatch(resetWindowState());
+  };
+
   return (
     <div className="w-full mt-10">
       <div className="flex justify-between w-full h-20 px-10">
@@ -17,9 +32,14 @@ export const HandleStepper = ({ finalStep }: { finalStep?: boolean }) => {
           Atras
         </button>
         {currentStep === allSteps.length - 1 ? (
-          <button className="btn btn-outline" type="button">
+          <Link
+            role="button"
+            href={"/"}
+            onClick={handleWindowCreated}
+            className="btn btn-outline"
+          >
             Añadir
-          </button>
+          </Link>
         ) : (
           <button
             className="btn btn-outline "

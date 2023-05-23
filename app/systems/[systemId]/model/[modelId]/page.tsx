@@ -26,7 +26,7 @@ const getGlasses = async () => {
   const res = await fetch(
     `${arqustikConfig.STRAPI_SERVER}/glass-categories?populate=glasses`,
     {
-      next: { revalidate: 60 },
+      next: { revalidate: 10 },
     },
   );
   if (!res.ok) throw new Error("Failed to fetch glasses data");
@@ -37,9 +37,10 @@ export default async function SystemPage({ params: { modelId } }: Params) {
   const modelData: Promise<ModelResponseT> = await getModelWindowPVC(modelId);
   const glassCategoriesData: Promise<GlassCategoriesResponseT> =
     await getGlasses();
-
   const model = await modelData;
   const glassCategories = await glassCategoriesData;
+
+
   return (
     <div className="container w-full h-full mx-auto">
       <Heading>Diseño</Heading>

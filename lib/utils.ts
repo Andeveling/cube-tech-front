@@ -61,3 +61,12 @@ export const truncate = (str: string, length: number) => {
   if (!str || str.length <= length) return str;
   return `${str.slice(0, length)}...`;
 };
+
+
+export const persistLocalStorage = <T>(key: string, value: T) => {
+  localStorage.setItem(key, JSON.stringify({ ...value }));
+};
+
+export const clearLocalStorage = (key: string) => {
+  localStorage.removeItem(key);
+};

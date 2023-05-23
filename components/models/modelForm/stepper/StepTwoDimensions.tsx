@@ -1,11 +1,6 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/use-store-hooks";
-import {
-  selectCurrentWindow,
-  setWindowDimensions,
-  setWindowLocation,
-  setWindowQuantity,
-} from "@/lib/redux/features/quoteDocument/quoteSlice";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
@@ -13,6 +8,7 @@ import { HandleStepper } from "./HandleStepper";
 import { StepperContext } from "./StepperContext";
 import * as yup from "yup";
 import Heading from "@/components/shared/heading";
+import { selectCurrentWindow, setWindowDimensions } from "@/lib/redux/features/createWindow/createWindowSlice";
 
 type FormData = {
   width: number;
@@ -51,7 +47,7 @@ export const StepTwoDimensions = ({
   const { handleNext } = useContext(StepperContext);
   const onSubmit = ({ width, height, quantity }: FormData) => {
     dispatch(setWindowDimensions({ width, height }));
-    dispatch(setWindowQuantity(quantity));
+    // dispatch(setWindowQuantity(quantity));
     handleNext();
   };
   return (
