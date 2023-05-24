@@ -115,7 +115,7 @@ export default function SummaryPage() {
                         Vidrio
                       </div>
                       <div className="flex items-center p-1 border-t">
-                        {itemQuotation.item.glassId}
+                        {itemQuotation.item.glassData?.attributes.nameUI}
                       </div>
                       <div className="flex items-center p-1 border-t border-r">
                         Color
