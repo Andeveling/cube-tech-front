@@ -1,19 +1,23 @@
 "use client";
 import Heading from "@/components/shared/heading";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/use-store-hooks";
-import { selectCurrentWindow, setWindowGlassId } from "@/lib/redux/features/createWindow/createWindowSlice";
+import {
+  selectCurrentWindow,
+  setWindowGlassData,
+} from "@/lib/redux/features/createWindow/createWindowSlice";
 
 import {
+  GlassAttributes,
   GlassCategoriesResponseT,
+  GlassDatum,
   GlassType,
 } from "@/models/strapi/Glasses.response";
 import { RadioGroup, Tab } from "@headlessui/react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import {  CheckCircle, Circle } from "lucide-react";
+import { CheckCircle, Circle } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 import { useContext } from "react";
 import { Controller, useForm } from "react-hook-form";
-import * as yup from "yup";
 import { HandleStepper } from "./HandleStepper";
 import { StepperContext } from "./StepperContext";
 
@@ -22,7 +26,7 @@ function classNames(...classes: string[]) {
 }
 
 type FormData = {
-  glassIdOption: string;
+  glassOption: GlassDatum["id"];
 };
 type Props = {
   glassCategories: GlassCategoriesResponseT;
@@ -30,21 +34,29 @@ type Props = {
 
 export const StepThreeSetGlass = ({ glassCategories }: Props) => {
   const dispatch = useAppDispatch();
-
+  const [glass, setGlass] = useState<GlassAttributes>();
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<FormData>({
-    resolver: yupResolver(validationSchema),
-    defaultValues: { glassIdOption: glassCategories.data[0].id.toString() },
-  });
+  } = useForm<FormData>();
   const windowCurrent = useAppSelector(selectCurrentWindow);
   const { handleNext } = useContext(StepperContext);
-  const onSubmit = ({ glassIdOption }: FormData) => {
-    dispatch(setWindowGlassId(glassIdOption));
+  const onSubmit = ({ glassOption }: FormData) => {
+    let selectedGlass = null;
+    glassCategories.data.forEach((category) => {
+      const foundGlass = category.attributes.glasses.data.find(
+        (glass) => glass.id === glassOption,
+      );
+      if (foundGlass) {
+        selectedGlass = foundGlass;
+        return;
+      }
+    });
+
+    if (selectedGlass) dispatch(setWindowGlassData(selectedGlass));
+
     handleNext();
-    console.log(windowCurrent);
   };
 
   return (
@@ -79,11 +91,14 @@ export const StepThreeSetGlass = ({ glassCategories }: Props) => {
               </Tab.List>
               <Controller
                 control={control}
-                name="glassIdOption"
+                name="glassOption"
                 rules={{ required: true }}
                 render={({ field }) => (
                   <>
-                    <RadioGroup value={field.value} onChange={field.onChange}>
+                    <RadioGroup
+                      value={field.value || ""}
+                      onChange={field.onChange}
+                    >
                       <Tab.Panels className="mt-2">
                         {glassCategories.data.map(({ id, attributes }) => (
                           <Tab.Panel key={id}>
@@ -156,9 +171,9 @@ export const StepThreeSetGlass = ({ glassCategories }: Props) => {
                                   </RadioGroup.Option>
                                 </li>
                               ))}
-                              {errors.glassIdOption && (
+                              {errors.glassOption && (
                                 <p className="text-sm text-error">
-                                  *{errors.glassIdOption.message}
+                                  *{errors.glassOption.message}
                                 </p>
                               )}
                             </ul>
@@ -192,7 +207,3 @@ const GlassMiniImage = ({ glassType }: { glassType: GlassType }) => {
     </div>
   );
 };
-
-const validationSchema = yup.object().shape({
-  glassIdOption: yup.string().required("Debe seleccionar una opción"),
-});

@@ -1,10 +1,10 @@
-import { StepFour } from "@/components/models/modelForm/stepper/StepFour";
-import { StepOneLocation } from "@/components/models/modelForm/stepper/StepOneLocation";
-import StepperProvider from "@/components/models/modelForm/stepper/StepperContext";
-import { StepThreeSetGlass } from "@/components/models/modelForm/stepper/StepThreeSetGlass";
-import { StepTwoDimensions } from "@/components/models/modelForm/stepper/StepTwoDimensions";
-import { WindowCreateStepper } from "@/components/models/modelForm/stepper/WindowCreateStepper";
-import { WindowPVCDraw } from "@/components/models/modelForm/WindowPVCDraw";
+import { StepFour } from "@/components/models/stepper/StepFour";
+import { StepOneLocation } from "@/components/models/stepper/StepOneLocation";
+import StepperProvider from "@/components/models/stepper/StepperContext";
+import { StepThreeSetGlass } from "@/components/models/stepper/StepThreeSetGlass";
+import { StepTwoDimensions } from "@/components/models/stepper/StepTwoDimensions";
+import { WindowCreateStepper } from "@/components/models/stepper/WindowCreateStepper";
+import { WindowPVCDraw } from "@/components/models/stepper/WindowPVCDraw";
 import Heading from "@/components/shared/heading";
 import { arqustikConfig } from "@/lib/constants";
 import { GlassCategoriesResponseT } from "@/models/strapi/Glasses.response";

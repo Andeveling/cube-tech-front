@@ -25,7 +25,7 @@ export const StepFour = () => {
           {(currentWindow.width / 1000) * (currentWindow.height / 1000)}m²
         </div>
         <div className="p-2 border-t border-r">Vidrio</div>
-        <div className="p-2 border-t">{currentWindow.glassId}</div>
+        <div className="p-2 border-t">{currentWindow.glassData?.attributes.nameUI}</div>
 
         <div className="p-2 border-t border-r">Color</div>
         <div className="p-2 border-t">Blanco</div>

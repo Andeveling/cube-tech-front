@@ -1,7 +1,7 @@
 import { AppState } from "@/lib/store/store";
+import { GlassDatum } from "@/models/strapi/Glasses.response";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { QuoteItemI } from "../quoteDocument/quoteSlice";
 
 interface InitialState {
   currentWindow: CreateWindowDataI;
@@ -12,7 +12,7 @@ export interface CreateWindowDataI {
   location: string;
   width: number;
   height: number;
-  glassId: number | null;
+  glassData: GlassDatum | null;
   quantity: number;
 }
 
@@ -22,7 +22,7 @@ const initialState: InitialState = {
     location: "",
     width: 1000,
     height: 1000,
-    glassId: null,
+    glassData: null,
     quantity: 1,
   },
 };
@@ -38,11 +38,11 @@ export const createWindowSlice = createSlice({
       state.currentWindow.width = action.payload.width;
       state.currentWindow.height = action.payload.height;
     },
-    setWindowGlassId: (state, action) => {
-      state.currentWindow.glassId = action.payload;
+    setWindowGlassData: (state, action) => {
+      state.currentWindow.glassData = action.payload;
     },
     generateReference: (state, action: PayloadAction<number>) => {
-      let referenceNumber = action.payload+1;
+      let referenceNumber = action.payload + 1;
       state.currentWindow.reference = `V${referenceNumber}`;
     },
     resetWindowState: (state) => {
@@ -50,7 +50,7 @@ export const createWindowSlice = createSlice({
       state.currentWindow.location = initialState.currentWindow.location;
       state.currentWindow.width = initialState.currentWindow.width;
       state.currentWindow.height = initialState.currentWindow.height;
-      state.currentWindow.glassId = initialState.currentWindow.glassId;
+      state.currentWindow.glassData = initialState.currentWindow.glassData;
       state.currentWindow.quantity = initialState.currentWindow.quantity;
     },
   },
@@ -64,7 +64,7 @@ export const selectCurrentWindow = (state: AppState) =>
 export const {
   setWindowLocation,
   setWindowDimensions,
-  setWindowGlassId,
+  setWindowGlassData,
   generateReference,
   resetWindowState,
 } = createWindowSlice.actions;
