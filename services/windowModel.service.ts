@@ -83,18 +83,12 @@ export const getModelWindowPVCAdapted = async (modelId: ID) => {
   };
   // const options = { headers: { Authorization: `Bearer ${token}` } };
 
-  // const urlParams = {populate:'deep'}
-
   const responseData: Promise<WindowModelResponse> = await fetchAPI(
     path,
     urlParams,
   );
   const modelData = await responseData;
-  console.log(
-    modelData.data.attributes.frame_profile.data.attributes
-      .reinforcement_profile.data.attributes.reinforcement_screw.data,
-  );
-  console.log(modelData.data.attributes);
+
   const modelAdapted = WindowModelAdapter(modelData);
   return modelAdapted;
 };

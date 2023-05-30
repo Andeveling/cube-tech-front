@@ -1,13 +1,16 @@
 "use client";
+import Heading from "@/components/shared/heading";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/use-store-hooks";
-import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  selectCurrentWindow,
+  setWindowDimensions
+} from "@/lib/redux/features/createWindow/createWindowSlice";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { HandleStepper } from "./HandleStepper";
 import { StepperContext } from "./StepperContext";
-import * as yup from "yup";
-import Heading from "@/components/shared/heading";
-import { selectCurrentWindow, setWindowDimensions } from "@/lib/redux/features/createWindow/createWindowSlice";
 
 type FormData = {
   width: number;
@@ -28,11 +31,12 @@ export const StepTwoDimensions = ({
   maxH,
   maxW,
 }: DimensionsData) => {
-  const CreateWindowSchema = yup.object().shape({
-    width: yup.number().positive().min(minW).max(maxW).required(),
-    height: yup.number().positive().min(minH).max(maxH).required(),
-    quantity: yup.number().positive().min(1).max(12).required().typeError('Introduce algun valor numerico'),
+  const CreateWindowSchemaZ = z.object({
+    width: z.number().positive().min(minW).max(maxW),
+    height: z.number().positive().min(minH).max(maxH),
+    quantity: z.number().positive().min(1).max(12),
   });
+
   const dispatch = useAppDispatch();
   const { width, height, quantity } = useAppSelector(selectCurrentWindow);
   const {
@@ -40,7 +44,7 @@ export const StepTwoDimensions = ({
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: yupResolver(CreateWindowSchema),
+    resolver: zodResolver(CreateWindowSchemaZ),
     defaultValues: { width, height, quantity },
   });
   const { handleNext } = useContext(StepperContext);
@@ -67,7 +71,7 @@ export const StepTwoDimensions = ({
               type="number"
               placeholder="Ancho mm"
               className="w-full input-bordered input"
-              {...register("width")}
+              {...register("width", { valueAsNumber: true })}
             />
             <label className="label">
               <span className="label-text-alt">
@@ -91,7 +95,7 @@ export const StepTwoDimensions = ({
               type="number"
               placeholder="Alto mm"
               className="w-full input-bordered input"
-              {...register("height")}
+              {...register("height", { valueAsNumber: true })}
             />
             <label className="label">
               <span className="label-text-alt">
@@ -114,7 +118,7 @@ export const StepTwoDimensions = ({
               type="number"
               placeholder="1"
               className="w-full input-bordered input"
-              {...register("quantity")}
+              {...register("quantity", { valueAsNumber: true })}
             />
             <label className="label">
               <span className="label-text-alt">Min : 1 | Max : 12</span>

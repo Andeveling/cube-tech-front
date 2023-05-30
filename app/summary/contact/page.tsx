@@ -1,11 +1,10 @@
 "use client";
 import Heading from "@/components/shared/heading";
-import { CreateContactSchema } from "@/components/summary/contact-schema";
+import { CreateContactSchemaZ } from "@/components/summary/contact-schema";
 import { useAppSelector } from "@/lib/hooks/use-store-hooks";
 import { selectQuoteItems } from "@/lib/redux/features/quoteDocument/quoteSlice";
 import { ContactI } from "@/models/Contact/Contact.type";
-import { yupResolver } from "@hookform/resolvers/yup";
-
+import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
@@ -21,7 +20,7 @@ export default function ContactPage() {
     reset,
     formState: { errors },
   } = useForm<CreateContactI>({
-    resolver: yupResolver(CreateContactSchema),
+    resolver: zodResolver(CreateContactSchemaZ),
     defaultValues: { windowsQuote: quote },
   });
   const onSubmit: SubmitHandler<CreateContactI> = async ({
@@ -32,7 +31,7 @@ export default function ContactPage() {
     windowsQuote,
   }) => {
     const data = {
-      contact: { fullName, cellphone, email, address, windowsQuote },
+      contact: { fullName, cellphone, email, address, windowsQuote: quote },
     };
     toast.promise(
       fetch("/api/contact/create-contact", {
@@ -41,7 +40,7 @@ export default function ContactPage() {
         headers: {
           "Content-Type": "application/json",
         },
-      }).then((res) => console.log(res)),
+      }),
       {
         loading: "Creando...",
         success: <b>¡Cotización creada!</b>,
@@ -66,11 +65,11 @@ export default function ContactPage() {
         <div className="w-full form-control">
           <label className="label">
             <span className="label-text">Tu nombre</span>
-            <span className="label-text-alt">Incluir apellidos</span>
+            <span className="label-text-alt">Requerido</span>
           </label>
           <input
             type="text"
-            placeholder="Nombre completo"
+            placeholder="Pepito Perez"
             className="w-full input input-bordered"
             {...register("fullName")}
           />
@@ -84,11 +83,11 @@ export default function ContactPage() {
         <div className="w-full form-control">
           <label className="label">
             <span className="label-text">Tu numero de celular</span>
-            <span className="label-text-alt">Conctato</span>
+            <span className="label-text-alt">Requerido</span>
           </label>
           <input
             type="text"
-            placeholder="Celular"
+            placeholder="300 123 456 789"
             className="w-full input input-bordered"
             {...register("cellphone")}
           />
@@ -102,11 +101,11 @@ export default function ContactPage() {
         <div className="w-full form-control">
           <label className="label">
             <span className="label-text">Tu dirección</span>
-            <span className="label-text-alt">Conctato</span>
+            <span className="label-text-alt">Requerido</span>
           </label>
           <input
             type="text"
-            placeholder="cra 1 # 2-3"
+            placeholder="Cra 1 # 2-3, Cali, Colombia"
             className="w-full input input-bordered"
             {...register("address")}
           />
@@ -119,7 +118,7 @@ export default function ContactPage() {
         <div className="w-full form-control">
           <label className="label">
             <span className="label-text">Tu email</span>
-            <span className="label-text-alt">Conctato</span>
+            <span className="label-text-alt">Requerido</span>
           </label>
           <input
             type="email"

@@ -1,11 +1,11 @@
 import { useCreateContactMutation } from "@/lib/redux/features/contact/contact.service";
 import { ContactI } from "@/models/Contact/Contact.type";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Download, X } from "lucide-react";
-import { useId, useRef } from "react";
+import { useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { CreateContactSchema } from "./contact-schema";
+import { CreateContactSchemaZ } from "./contact-schema";
 
 export const InterestedModal = () => {
   const [
@@ -18,7 +18,7 @@ export const InterestedModal = () => {
     reset,
     formState: { errors },
   } = useForm<ContactI>({
-    resolver: yupResolver(CreateContactSchema),
+    resolver: zodResolver(CreateContactSchemaZ),
   });
   const onSubmit: SubmitHandler<ContactI> = async ({
     fullName,

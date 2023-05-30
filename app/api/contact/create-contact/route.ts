@@ -7,16 +7,18 @@ interface RequestBody {
 }
 
 export async function POST(request: Request) {
- try {
-   const { contact }: Partial<RequestBody> = await request.json();
-   if (!contact)
-     return NextResponse.json({ message: "Los datos no estan completos" });
-   if (contact.windowsQuote.length === 0)
-     return NextResponse.json({ message: "No tienes ventanas en la lista" });
-   const windowOne = contact.windowsQuote[0];
-   const newWindowCost = await calculateWindowCost(windowOne);
-   return NextResponse.json(newWindowCost);
- } catch (error) {
-  return NextResponse.json(error);
- }
+  try {
+    const { contact }: Partial<RequestBody> = await request.json();
+    if (!contact)
+      return NextResponse.json({ message: "Los datos no estan completos" });
+    if (contact.windowsQuote.length === 0 || !contact.windowsQuote)
+      return NextResponse.json({ message: "No tienes ventanas en la lista" });
+    const windowOne = contact.windowsQuote[0];
+    // ok calculate windows cost
+    const newWindowCost = await calculateWindowCost(windowOne);
+    // TODO: return object with windows list cost render to quote document
+    return NextResponse.json(newWindowCost);
+  } catch (error) {
+    return NextResponse.json(error);
+  }
 }

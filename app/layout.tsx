@@ -9,17 +9,10 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
 export const metadata = {
-  title: "Arqustik - Soluciones termoacusticas en tus ventanas",
+  title: "Arqustik - Soluciones termo-acusticas en tus ventanas",
   description:
-    "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
-  twitter: {
-    card: "summary_large_image",
-    title: "Precedent - Building blocks for your Next.js project",
-    description:
-      "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
-    creator: "@steventey",
-  },
-  metadataBase: new URL("https://precedent.dev"),
+    "Somos una empresa dedicada al diseño, fabricación e instalación de ventanas y puertas con perfiles en PVC, brindando soluciones a nuestros clientes para mejorar el confort en sus espacios.",
+  metadataBase: new URL("https://www.arqustik.com"),
   themeColor: "#FFF",
 };
 
