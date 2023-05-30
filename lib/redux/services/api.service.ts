@@ -4,11 +4,12 @@ import { HYDRATE } from "next-redux-wrapper";
 
 export const apiSlice = createApi({
   reducerPath: "Strapi Server",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:1337/api/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "" }),
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {
       return action.payload[reducerPath];
     }
   },
   endpoints: (builder) => ({}),
+  tagTypes: ["Contacts"],
 });

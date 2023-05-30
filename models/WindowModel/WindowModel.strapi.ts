@@ -1,4 +1,11 @@
-import { Meta } from '../ResponseStrapi/ResponseStrapi.model';
+import { Meta } from "../strapi/Global.response";
+import { SystemResponseT } from "../System-PVC/SystemPVC.strapi";
+import { WindowModelsEnum } from "../windowPVC.model";
+
+export interface WindowsModelsResponse {
+  data: WindowModelResponseData[];
+  meta: Meta;
+}
 
 export interface WindowModelResponse {
   data: WindowModelResponseData;
@@ -15,10 +22,12 @@ interface WindowModel {
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
-  frame_profile: FrameProfile;
-  sash_profile: FrameProfile;
-  transom_profile: FrameProfile;
+  draw_ref: WindowModelsEnum;
+  frame_profile: PVCProfileResponseData;
+  sash_profile: PVCProfileResponseData;
+  transom_profile: PVCProfileResponseData;
   hardware_kit: HardwareKit;
+  system_pvc: SystemResponseT;
 }
 export interface HardwareKit {
   data: HardwareKitData;
@@ -53,12 +62,12 @@ export interface AccessoriesAttributes {
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
-  cremona: Accessory;
-  mullion: Accessory;
-  striker: Accessory;
+  cremona: AccessoryResponseData;
+  mullion: AccessoryResponseData;
+  striker: AccessoryResponseData;
 }
 
-interface Accessory {
+interface AccessoryResponseData {
   data: AccessoryData;
 }
 
@@ -76,7 +85,40 @@ interface AccessoryAttributes {
   publishedAt: Date;
 }
 
-interface FluffyAttributes {
+interface PVCProfileResponseData {
+  data: PVCProfileData;
+}
+interface ReinforcementResponseData { 
+  data: ReinforcementData;
+}
+interface ReinforcementScrewResponseData {
+  data: ReinforcementScrewData;
+}
+
+
+interface ReinforcementData  {
+  id: number;
+  attributes: ReinforcementProfileAttributes;
+};
+interface ReinforcementScrewData {
+  id: number;
+  attributes: ReinforcementScrewAttributes;
+}
+
+interface PVCProfileData {
+  id: number;
+  attributes: PVCProfileAttributes;
+}
+interface ReinforcementScrewAttributes {
+  id_provider: string;
+  name: string;
+  price: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date;
+}
+
+interface PVCProfileAttributes {
   id_provider: string;
   name: string;
   price: number;
@@ -86,15 +128,17 @@ interface FluffyAttributes {
   cuttingTransomSize: number;
   cuttingGlassSize: number;
   cuttingSashSize: number;
-  reinforcement_profile: FrameProfile;
-  reinforcement_screw: FrameProfile;
+  reinforcement_profile: ReinforcementResponseData;
 }
 
-interface FrameProfileData {
-  id: number;
-  attributes: FluffyAttributes;
-}
+interface ReinforcementProfileAttributes  {
+  id_provider: string;
+  name: string;
+  price: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date;
+  reinforcement_screw: ReinforcementScrewResponseData;
+};
 
-interface FrameProfile {
-  data: FrameProfileData;
-}
+

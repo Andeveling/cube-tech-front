@@ -31,18 +31,24 @@ export const quoteSlice = createSlice({
     },
     removeWindowFromQuote: (state, action: PayloadAction<QuoteItemI["id"]>) => {
       const id = action.payload;
-      state.quoteState = state.quoteState.filter((item) => item.id !== id);
+      state.quoteState = state.quoteState.filter(
+        (item: { id: string }) => item.id !== id,
+      );
     },
     incrementQuantity: (state, action: PayloadAction<QuoteItemI["id"]>) => {
       const id = action.payload;
-      const windowItem = state.quoteState.find((item) => item.id === id);
+      const windowItem = state.quoteState.find(
+        (item: { id: string }) => item.id === id,
+      );
       if (windowItem) {
         windowItem.item.quantity += 1;
       }
     },
     decrementQuantity: (state, action: PayloadAction<QuoteItemI["id"]>) => {
       const id = action.payload;
-      const windowItem = state.quoteState.find((item) => item.id === id);
+      const windowItem = state.quoteState.find(
+        (item: { id: string }) => item.id === id,
+      );
       if (windowItem && windowItem.item.quantity > 1) {
         windowItem.item.quantity -= 1;
       }

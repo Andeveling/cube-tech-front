@@ -6,40 +6,16 @@ import { StepTwoDimensions } from "@/components/models/stepper/StepTwoDimensions
 import { WindowCreateStepper } from "@/components/models/stepper/WindowCreateStepper";
 import { WindowPVCDraw } from "@/components/models/stepper/WindowPVCDraw";
 import Heading from "@/components/shared/heading";
-import { arqustikConfig } from "@/lib/constants";
-import { GlassCategoriesResponseT } from "@/models/strapi/Glasses.response";
-import { ModelResponseT } from "models/strapi/windowModel.response";
 import { Suspense } from "react";
+import { getGlasses } from "services/glass.service";
+import { getModelWindowPVC } from "services/windowModel.service";
+import { v4 as uuid } from "uuid";
 
 type Params = { params: { modelId: string } };
 
-const getModelWindowPVC = async (modelId: string) => {
-  const res = await fetch(
-    `${arqustikConfig.STRAPI_SERVER}/window-models/${modelId}`,
-    { next: { revalidate: 60 } },
-  );
-  if (!res.ok) throw new Error("Failed to fetch models data");
-  return res.json();
-};
-
-const getGlasses = async () => {
-  const res = await fetch(
-    `${arqustikConfig.STRAPI_SERVER}/glass-categories?populate=glasses`,
-    {
-      next: { revalidate: 10 },
-    },
-  );
-  if (!res.ok) throw new Error("Failed to fetch glasses data");
-  return res.json();
-};
-
 export default async function SystemPage({ params: { modelId } }: Params) {
-  const modelData: Promise<ModelResponseT> = await getModelWindowPVC(modelId);
-  const glassCategoriesData: Promise<GlassCategoriesResponseT> =
-    await getGlasses();
-  const model = await modelData;
-  const glassCategories = await glassCategoriesData;
-
+  const model = await getModelWindowPVC(modelId);
+  const glassCategories = await getGlasses();
 
   return (
     <div className="container w-full h-full mx-auto">
@@ -50,23 +26,34 @@ export default async function SystemPage({ params: { modelId } }: Params) {
       >
         Configura tu ventana.
       </p>
-      <div className="grid justify-center w-full grid-cols-1 gap-4 p-2 md:grid-cols-2 ">
+      <div className="grid justify-center w-full grid-cols-1 gap-4 p-2 xl:grid-cols-2 ">
         <Suspense fallback={<h1>Loading...</h1>}>
-          <WindowPVCDraw model={model.data.attributes.draw_ref} />
+          <WindowPVCDraw model={model?.data.attributes.draw_ref} />
         </Suspense>
 
         <Suspense fallback={<h1>Loading...</h1>}>
           <StepperProvider
             steps={[
-              <StepOneLocation />,
-              <StepTwoDimensions
-                minH={model.data.attributes.minH}
-                maxH={model.data.attributes.maxH}
-                minW={model.data.attributes.minW}
-                maxW={model.data.attributes.maxW}
+              <StepOneLocation
+                key={uuid()}
+                modelId={model?.data.id}
+                systemName={
+                  model.data.attributes.system_pvc.data.attributes.name
+                }
+                model={model?.data.attributes.draw_ref}
               />,
-              <StepThreeSetGlass glassCategories={glassCategories} />,
-              <StepFour />,
+              <StepTwoDimensions
+                key={uuid()}
+                minH={model?.data.attributes.minH}
+                maxH={model?.data.attributes.maxH}
+                minW={model?.data.attributes.minW}
+                maxW={model?.data.attributes.maxW}
+              />,
+              <StepThreeSetGlass
+                key={uuid()}
+                glassCategories={glassCategories}
+              />,
+              <StepFour key={uuid()} />,
             ]}
           >
             <WindowCreateStepper />

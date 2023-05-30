@@ -1,9 +1,8 @@
 import Heading from "@/components/shared/heading";
 import WindowDraw from "@/components/shared/models-windows-pvc/window-draw";
-import { arqustikConfig } from "@/lib/constants";
-import { SystemResponseT } from "@/models/strapi/Systems.response";
 import { WindowModelsEnum } from "@/models/windowPVC.model";
 import Link from "next/link";
+import { getSystemPVC } from "services/systems-pvc.service";
 
 type Params = { params: { systemId: string } };
 type CardProps = {
@@ -12,17 +11,8 @@ type CardProps = {
   systemId: number | string;
 };
 
-const getSystemPVC = async (systemId: string) => {
-  const res = await fetch(
-    `${arqustikConfig.STRAPI_SERVER}/system-pvcs/${systemId}?populate=window_models`,
-    { next: { revalidate: 60 } },
-  );
-  if (!res.ok) throw new Error("Failed to fetch data");
-  return res.json();
-};
-
 export default async function SystemPage({ params: { systemId } }: Params) {
-  const system: SystemResponseT = await getSystemPVC(systemId);
+  const system = await getSystemPVC(systemId);
 
   return (
     <div className="container mx-auto">

@@ -1,15 +1,9 @@
 import { WindowModelsEnum } from "@/models/windowPVC.model";
-import classNames from "classnames";
 import ModelO from "./Windows/ModelO";
-import ModelOXX from "./Windows/ModelOXX";
-import ModelOXXO from "./Windows/ModelOXXO";
 import ModelVLeft from "./Windows/ModelVLeft";
 import ModelVO from "./Windows/ModelVO";
 import ModelVV from "./Windows/ModelVV";
 import ModelXO from "./Windows/ModelXO";
-import ModelXX from "./Windows/ModelXX";
-import ModelXXO from "./Windows/ModelXXO";
-import ModelXXX from "./Windows/ModelXXX";
 
 const WindowDraw = ({
   height,
@@ -23,26 +17,28 @@ const WindowDraw = ({
   className?: string;
 }) => {
   switch (model) {
-    case WindowModelsEnum.XX:
-      return <ModelXX width={width} height={height} />;
-    case WindowModelsEnum.XO:
+    // case WindowModelsEnum.XX:
+    //   return <ModelXX width={width} height={height} />;
+    case WindowModelsEnum.XOW:
       return <ModelXO width={width} height={height} />;
-    case WindowModelsEnum.OXX:
-      return <ModelOXX width={width} height={height} />;
-    case WindowModelsEnum.XXO:
-      return <ModelXXO width={width} height={height} />;
-    case WindowModelsEnum.OXXO:
-      return <ModelOXXO width={width} height={height} />;
-    case WindowModelsEnum.XXX:
-      return <ModelXXX width={width} height={height} />;
+    // case WindowModelsEnum.OXX:
+    //   return <ModelOXX width={width} height={height} />;
+    // case WindowModelsEnum.XXO:
+    //   return <ModelXXO width={width} height={height} />;
+    // case WindowModelsEnum.OXXO:
+    //   return <ModelOXXO width={width} height={height} />;
+    // case WindowModelsEnum.XXX:
+    //   return <ModelXXX width={width} height={height} />;
     case WindowModelsEnum.O:
       return <ModelO width={width} height={height} />;
-    case WindowModelsEnum.T:
-    case WindowModelsEnum.Z:
+    case WindowModelsEnum.ZW:
+    case WindowModelsEnum.TD:
+    case WindowModelsEnum.ZD:
       return <ModelVLeft width={width} height={height} />;
-    case WindowModelsEnum.ZZ:
+    case WindowModelsEnum.ZZW:
       return <ModelVV width={width} height={height} />;
-    case WindowModelsEnum.ZO:
+    case WindowModelsEnum.ZOW:
+    case WindowModelsEnum.ZOD:
       return <ModelVO width={width} height={height} />;
 
     default:

@@ -1,14 +1,7 @@
 import Card from "@/components/home/card";
-import { arqustikConfig } from "@/lib/constants";
-import Counter from "@/lib/redux/features/counter/Counter";
-import { SystemsResponseT } from "models/strapi/Systems.response";
+import { SystemsResponseT } from "@/models/System-PVC/SystemPVC.strapi";
 import Balancer from "react-wrap-balancer";
-
-const getSystemsPVC = async () => {
-  const res = await fetch(`${arqustikConfig.STRAPI_SERVER}/system-pvcs`);
-  if (!res.ok) throw new Error("Failed to fetch data");
-  return res.json();
-};
+import { getSystemsPVC } from "services/systems-pvc.service";
 
 export default async function Home() {
   const systems: SystemsResponseT = await getSystemsPVC();
@@ -38,7 +31,6 @@ export default async function Home() {
           />
         ))}
       </div>
-    
     </div>
   );
 }

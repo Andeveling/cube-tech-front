@@ -1,5 +1,11 @@
-import { Meta } from '../../ResponseStrapi/ResponseStrapi.model';
-import { GlassResponse } from '../Glass/Glass.strapi';
+import { Meta } from "@/models/strapi/Global.response";
+import { GlassResponse } from "../Glass/Glass.strapi";
+import { ID } from "../Item.model";
+
+export interface GlazingsBeadGlassesResponse {
+  data: GlazingBeadGlassData[];
+  meta: Meta;
+}
 
 export interface GlazingBeadGlassResponse {
   data: GlazingBeadGlassData;
@@ -7,7 +13,7 @@ export interface GlazingBeadGlassResponse {
 }
 
 interface GlazingBeadGlassData {
-  id: number;
+  id: ID;
   attributes: GlazingBeadGlassAttributes;
 }
 

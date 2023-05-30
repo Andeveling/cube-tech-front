@@ -1,4 +1,4 @@
-import { Meta } from "./Global.response";
+import { Meta } from "../strapi/Global.response";
 
 export interface GlassCategoriesResponseT {
   data: GlassCategoriesDatum[];
@@ -15,7 +15,7 @@ export interface GlassCategoriesAttributes {
   glassType: GlassType;
   createdAt: Date;
   glasses: Glasses;
-  features: string[]
+  features: string[];
   publishedAt: Date;
   updatedAt: Date;
 }
@@ -38,11 +38,27 @@ export interface GlassAttributes {
   price: number;
   publishedAt: Date;
   updatedAt: Date;
+  glass_glazing_bead_system: GlassGlazingBead;
+}
 
+export interface GlassGlazingBead {
+  data: GlassGlazingBeadData;
+}
+
+export interface GlassGlazingBeadData {
+  attributes: GlassGlazingBeadDataAttributes;
+  id: number;
+}
+
+export interface GlassGlazingBeadDataAttributes {
+  createdAt: Date;
+  publishedAt: Date;
+  title: string;
+  updatedAt: Date;
 }
 
 export enum GlassType {
-  MONOLITHIC = 'monolithic',
-  LAMINATED = 'laminated',
-  INSULATED = 'insulated'
+  MONOLITHIC = "monolithic",
+  LAMINATED = "laminated",
+  INSULATED = "insulated",
 }

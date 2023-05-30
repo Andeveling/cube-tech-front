@@ -1,17 +1,19 @@
+
+import { SystemResponseT } from "../System-PVC/SystemPVC.strapi";
 import { WindowModelsEnum } from "../windowPVC.model";
 import { Meta } from "./Global.response";
 
-export type ModelResponseT = {
+export interface ModelResponseT  {
   data: ModelData;
   meta: Meta;
 };
 
-type ModelData = {
+interface ModelData  {
   id: number;
   attributes: ModelAttributes;
 };
 
-type ModelAttributes = {
+interface ModelAttributes {
   name: string;
   draw_ref: WindowModelsEnum;
   minH: number;
@@ -21,4 +23,6 @@ type ModelAttributes = {
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
+  system_pvc: SystemResponseT;
 };
+

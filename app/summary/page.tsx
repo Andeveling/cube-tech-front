@@ -5,7 +5,7 @@ import {
   decrementQuantity,
   incrementQuantity,
   removeWindowFromQuote,
-  selectQuoteItems,
+  selectQuoteItems
 } from "@/lib/redux/features/quoteDocument/quoteSlice";
 import { ChevronLeft, Download, Minus, Plus, Trash } from "lucide-react";
 import Link from "next/link";
@@ -31,10 +31,11 @@ export default function SummaryPage() {
         </div>
         <Heading>Resumen</Heading>
         <div className="place-self-end">
-          <button className="btn">
+          {/* <InterestedModal/> */}
+          <Link href={"/summary/contact"} role="button" className="btn">
             <Download size={25} className="mr-2" />
             Imprimir \ Descargar
-          </button>
+          </Link>
         </div>
       </div>
       <p className="text-center text-gray-500 animate-fade-up md:text-2xl">
@@ -170,3 +171,5 @@ export default function SummaryPage() {
     </div>
   );
 }
+
+

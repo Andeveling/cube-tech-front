@@ -1,4 +1,5 @@
-import { Meta } from '../../ResponseStrapi/ResponseStrapi.model';
+import { Meta } from "@/models/strapi/Global.response";
+
 
 export interface GlassResponse {
   data: GlassData;
@@ -17,3 +18,4 @@ interface GlassAttributes {
   updatedAt: Date;
   publishedAt: Date;
 }
+

@@ -71,5 +71,13 @@ export const WindowModelAdapter = (response: WindowModelResponse): WindowModel =
     hardware_kit = new HardwareKit(response.data.attributes.hardware_kit.data.attributes.total);
   }
 
-  return new WindowModel(response.data.id, 'everest', 'O', frame, sash, transom, hardware_kit);
+  return new WindowModel(
+    response.data.id,
+    response.data.attributes.system_pvc.data.attributes.name,
+    response.data.attributes.draw_ref,
+    frame,
+    sash,
+    transom,
+    hardware_kit,
+  );
 };

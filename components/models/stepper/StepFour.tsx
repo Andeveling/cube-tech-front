@@ -1,8 +1,11 @@
 "use client";
 import Heading from "@/components/shared/heading";
-import { useAppSelector } from "@/lib/hooks/use-store-hooks";
-import { selectCurrentWindow } from "@/lib/redux/features/createWindow/createWindowSlice";
-import { selectQuoteItems } from "@/lib/redux/features/quoteDocument/quoteSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/use-store-hooks";
+import {
+  resetWindowState,
+  selectCurrentWindow,
+} from "@/lib/redux/features/createWindow/createWindowSlice";
+
 import { HandleStepper } from "./HandleStepper";
 
 export const StepFour = () => {
@@ -25,14 +28,16 @@ export const StepFour = () => {
           {(currentWindow.width / 1000) * (currentWindow.height / 1000)}m²
         </div>
         <div className="p-2 border-t border-r">Vidrio</div>
-        <div className="p-2 border-t">{currentWindow.glassData?.attributes.nameUI}</div>
+        <div className="p-2 border-t">
+          {currentWindow.glassData.attributes.nameUI || ''}
+        </div>
 
         <div className="p-2 border-t border-r">Color</div>
         <div className="p-2 border-t">Blanco</div>
         <div className="p-2 border-t border-b border-r">Cantidad</div>
         <div className="p-2 border-t border-b">{currentWindow.quantity}</div>
       </div>
-      <HandleStepper/>
+      <HandleStepper />
     </div>
   );
 };

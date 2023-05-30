@@ -1,15 +1,11 @@
 export enum WindowModelsEnum {
-  XO = "XO",
-  OX = "OX",
-  XX = "XX",
-  OXXO = "OXXO",
-  XXO = "XXO",
-  OXX = "OXX",
-  XXX = "XXX",
-  Z = "Z",
   O = "O",
-  ZZ = "ZZ",
-  ZO = "ZO",
-  T= 'T',
-
+  ZW = "ZW",
+  ZOW = "ZOW",
+  ZZW = "ZZW",
+  ZD = 'ZD',
+  ZOD = 'ZOD',
+  TD = "TD",
+  XOW = "XOW",
+  OXXOW = "OXXOW",
 }

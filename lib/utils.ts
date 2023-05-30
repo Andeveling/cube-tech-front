@@ -1,4 +1,48 @@
 import ms from "ms";
+import qs from "qs";
+
+export function getStrapiURL(path = "") {
+  return `${
+    process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337"
+  }${path}`;
+}
+
+export async function fetchAPI(
+  path: string,
+  urlParamsObject = {},
+  options = {},
+) {
+  try {
+    // Merge default and user options
+    const mergedOptions = {
+      next: { revalidate: 60 },
+      headers: {
+        "Content-Type": "application/json",
+      },
+      ...options,
+    };
+
+    // Build request URL
+    const queryString = qs.stringify(urlParamsObject);
+    console.log(queryString);
+
+    const requestUrl = `${getStrapiURL(
+      `/api${path}${queryString ? `?${queryString}` : ""}`,
+    )}`;
+
+    
+
+    // Trigger API call
+    const response = await fetch(requestUrl, mergedOptions);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error(
+      `Please check if your server is running and you set all the required tokens.`,
+    );
+  }
+}
 
 export const timeAgo = (timestamp: Date, timeOnly?: boolean): string => {
   if (!timestamp) return "never";
@@ -61,7 +105,6 @@ export const truncate = (str: string, length: number) => {
   if (!str || str.length <= length) return str;
   return `${str.slice(0, length)}...`;
 };
-
 
 export const persistLocalStorage = <T>(key: string, value: T) => {
   localStorage.setItem(key, JSON.stringify({ ...value }));

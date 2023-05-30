@@ -1,21 +1,16 @@
 "use client";
 import Heading from "@/components/shared/heading";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/use-store-hooks";
+import { useAppDispatch } from "@/lib/hooks/use-store-hooks";
+import { setWindowGlassData } from "@/lib/redux/features/createWindow/createWindowSlice";
 import {
-  selectCurrentWindow,
-  setWindowGlassData,
-} from "@/lib/redux/features/createWindow/createWindowSlice";
-
-import {
-  GlassAttributes,
   GlassCategoriesResponseT,
   GlassDatum,
   GlassType,
-} from "@/models/strapi/Glasses.response";
+} from "@/models/GlassCategories/GlassCategory.strapi";
+
 import { RadioGroup, Tab } from "@headlessui/react";
 import { CheckCircle, Circle } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
 import { useContext } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { HandleStepper } from "./HandleStepper";
@@ -34,14 +29,12 @@ type Props = {
 
 export const StepThreeSetGlass = ({ glassCategories }: Props) => {
   const dispatch = useAppDispatch();
-  const [glass, setGlass] = useState<GlassAttributes>();
+  const { handleNext } = useContext(StepperContext);
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<FormData>();
-  const windowCurrent = useAppSelector(selectCurrentWindow);
-  const { handleNext } = useContext(StepperContext);
   const onSubmit = ({ glassOption }: FormData) => {
     let selectedGlass = null;
     glassCategories.data.forEach((category) => {
@@ -53,12 +46,10 @@ export const StepThreeSetGlass = ({ glassCategories }: Props) => {
         return;
       }
     });
-
     if (selectedGlass) dispatch(setWindowGlassData(selectedGlass));
-
     handleNext();
   };
-
+  
   return (
     <div>
       <div id="cristal">
@@ -171,11 +162,13 @@ export const StepThreeSetGlass = ({ glassCategories }: Props) => {
                                   </RadioGroup.Option>
                                 </li>
                               ))}
-                              {errors.glassOption && (
-                                <p className="text-sm text-error">
-                                  *{errors.glassOption.message}
-                                </p>
-                              )}
+
+                              {errors.glassOption &&
+                                errors.glassOption.type === "required" && (
+                                  <span className="text-sm text-error">
+                                    * Este campo es requerido
+                                  </span>
+                                )}
                             </ul>
                           </Tab.Panel>
                         ))}

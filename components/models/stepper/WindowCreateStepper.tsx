@@ -1,15 +1,9 @@
 "use client";
-import { useAppSelector } from "@/lib/hooks/use-store-hooks";
-import { selectCurrentWindow } from "@/lib/redux/features/createWindow/createWindowSlice";
 import { useContext } from "react";
-import { SubmitHandler } from "react-hook-form";
 import { StepperContext } from "./StepperContext";
 
 export const WindowCreateStepper = () => {
-  const currentWindow = useAppSelector(selectCurrentWindow);
-  const onSubmit: SubmitHandler<any> = async (data) => alert(data);
-  const { currentStep, handleBack, handleNext, allSteps } =
-    useContext(StepperContext);
+  const { currentStep, allSteps } = useContext(StepperContext);
 
   return (
     <div className="flex justify-center">
