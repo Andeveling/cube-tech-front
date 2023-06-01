@@ -49,7 +49,7 @@ export const StepThreeSetGlass = ({ glassCategories }: Props) => {
     if (selectedGlass) dispatch(setWindowGlassData(selectedGlass));
     handleNext();
   };
-  
+
   return (
     <div>
       <div id="cristal">
@@ -67,7 +67,7 @@ export const StepThreeSetGlass = ({ glassCategories }: Props) => {
                     key={category.id}
                     className={({ selected }) =>
                       classNames(
-                        "w-full  py-2.5 text-sm font-medium leading-5 text-primary",
+                        "w-full  py-2.5 text-sm font-medium leading-5 text-primary h-auto",
 
                         selected
                           ? "bg-white shadow border-2 border-primary "
@@ -76,7 +76,7 @@ export const StepThreeSetGlass = ({ glassCategories }: Props) => {
                     }
                   >
                     <GlassMiniImage glassType={category.attributes.glassType} />
-                    <span className="w-full">{category.attributes.name}</span>
+                    <span className="w-full mt-2">{category.attributes.name}</span>
                   </Tab>
                 ))}
               </Tab.List>
@@ -189,12 +189,15 @@ export const StepThreeSetGlass = ({ glassCategories }: Props) => {
 const GlassMiniImage = ({ glassType }: { glassType: GlassType }) => {
   return (
     <div className="flex items-center justify-center w-full ">
-      <figure className="p-2 bg-white rounded-full">
+      <figure className="p-2 bg-white rounded-full w-[80px] h-[100px]">
         <Image
           src={`/assets/images/glasses/${glassType}.png`}
           alt="glass image"
-          width={45}
-          height={50}
+          width={0}
+          height={0}
+          sizes="50px"
+          quality={75}
+          className="w-full h-auto"
         />
       </figure>
     </div>

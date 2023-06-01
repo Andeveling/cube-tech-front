@@ -1,18 +1,11 @@
+import { ModelsCard } from "@/components/models/ModelsCard";
 import Heading from "@/components/shared/heading";
-import WindowDraw from "@/components/shared/models-windows-pvc/window-draw";
-import { WindowModelsEnum } from "@/models/windowPVC.model";
-import Link from "next/link";
-import { getSystemPVC } from "services/systems-pvc.service";
+import { getSystemWithModelsPVC } from "services/systems-pvc.service";
 
 type Params = { params: { systemId: string } };
-type CardProps = {
-  model: WindowModelsEnum;
-  modelId: number;
-  systemId: number | string;
-};
 
 export default async function SystemPage({ params: { systemId } }: Params) {
-  const system = await getSystemPVC(systemId);
+  const system = await getSystemWithModelsPVC(systemId);
 
   return (
     <div className="container mx-auto">
@@ -31,8 +24,8 @@ export default async function SystemPage({ params: { systemId } }: Params) {
         {system.data.attributes.window_models.data.map(({ id, attributes }) => (
           <ModelsCard
             key={id}
-            model={attributes.draw_ref}
             modelId={id}
+            model={attributes.draw_ref}
             systemId={systemId}
           />
         ))}
@@ -41,18 +34,4 @@ export default async function SystemPage({ params: { systemId } }: Params) {
   );
 }
 
-const ModelsCard = ({ model, modelId, systemId }: CardProps) => {
-  return (
-    <li
-      className="max-w-sm border w-80 h-80 card animate-fade-up"
-      style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
-    >
-      <Link
-        href={`/systems/${systemId}/model/${modelId}`}
-        className="w-full h-full"
-      >
-        <WindowDraw model={model} height={0} width={0} />
-      </Link>
-    </li>
-  );
-};
+

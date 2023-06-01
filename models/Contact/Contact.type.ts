@@ -7,3 +7,6 @@ export interface ContactI {
   email: string;
   windowsQuote: QuoteItemI[];
 }
+export interface CreateContactI extends ContactI {
+  terms: boolean;
+}

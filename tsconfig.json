@@ -12,7 +12,8 @@
       "@/app/*": ["app/*"],
       "@/lib/*": ["lib/*"],
       "@/styles/*": ["styles/*"],
-      "@/models/*": ["models/*"]
+      "@/models/*": ["models/*"],
+      "@/services/*": ["services/*"],
     },
     "strict": true,
     "forceConsistentCasingInFileNames": true,

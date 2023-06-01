@@ -1,0 +1,95 @@
+{
+  "windowCost": {
+    "frameCost": 14.01,
+    "sashCost": 0,
+    "transomCost": 0,
+    "glassCost": 16.41672,
+    "glazingBeadCost": 2.9312000000000005,
+    "miscCost": 0.55,
+    "accessoriesCost": 0
+  },
+  "window": {
+    "width": 1000,
+    "height": 1000,
+    "widthMeters": 1,
+    "heightMeters": 1,
+    "area": 1,
+    "perimeter": 4,
+    "glazingBeadAndGlass": {
+      "glass": {
+        "id": 4,
+        "name": "4mm+5mm/Cam6/+5mm Tempered - Insulado",
+        "price": 20
+      },
+      "glazingBead": { "id": 4, "name": "Glazing Bead 21 mm", "price": 0.8 },
+      "caliber": 20
+    },
+    "glass": null,
+    "glassArea": 0.820836,
+    "glassCaliber": 0,
+    "glazingBeadProfile": {
+      "id": 4,
+      "name": "Glazing Bead 21 mm",
+      "price": 0.8
+    },
+    "glazingBeadLength": 3.664,
+    "leftProfile": {
+      "length": 1000,
+      "cuttingGlassSize": 47,
+      "cuttingTransomSize": 42,
+      "rightCuttingAngle": 45,
+      "leftCuttingAngle": 45
+    },
+    "upProfile": {
+      "length": 1000,
+      "cuttingGlassSize": 47,
+      "cuttingTransomSize": 42,
+      "rightCuttingAngle": 45,
+      "leftCuttingAngle": 45
+    },
+    "rightProfile": {
+      "length": 1000,
+      "cuttingGlassSize": 47,
+      "cuttingTransomSize": 42,
+      "rightCuttingAngle": 45,
+      "leftCuttingAngle": 45
+    },
+    "downProfile": {
+      "length": 1000,
+      "cuttingGlassSize": 47,
+      "cuttingTransomSize": 42,
+      "rightCuttingAngle": 45,
+      "leftCuttingAngle": 45
+    },
+    "verticalTransom": null,
+    "horizontalTransom": null,
+    "sashModules": [],
+    "fixedModules": []
+  },
+  "windowModel": {
+    "profile_sash": null,
+    "profile_transom": null,
+    "hardware_kit": null,
+    "id": 1,
+    "system": "Everest-Max",
+    "modelDraw": "O",
+    "profile_frame": {
+      "id": "12301",
+      "name": "frame everest max",
+      "price": 3.48,
+      "cuttingGlassSize": 47,
+      "cuttingTransomSize": 42,
+      "cuttingSashSize": 31,
+      "reinforcement_profile": {
+        "id": "13091",
+        "name": "Reinforcement Max Frame 1mm",
+        "price": 1.19,
+        "reinforcement_screw": {
+          "id": "13009",
+          "name": "3.9X22 Drill Screw",
+          "price": 0.05
+        }
+      }
+    }
+  }
+}

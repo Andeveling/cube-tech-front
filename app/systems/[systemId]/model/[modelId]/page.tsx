@@ -7,15 +7,16 @@ import { WindowCreateStepper } from "@/components/models/stepper/WindowCreateSte
 import { WindowPVCDraw } from "@/components/models/stepper/WindowPVCDraw";
 import Heading from "@/components/shared/heading";
 import { Suspense } from "react";
-import { getGlasses } from "services/glass.service";
-import { getModelWindowPVC } from "services/windowModel.service";
+import { getGlassesCategories } from "@/services/glass.service";
+import { getModelWindowPVC } from "@/services/windowModel.service";
 import { v4 as uuid } from "uuid";
+import Loader from "@/components/shared/Loader";
 
 type Params = { params: { modelId: string } };
 
 export default async function SystemPage({ params: { modelId } }: Params) {
   const model = await getModelWindowPVC(modelId);
-  const glassCategories = await getGlasses();
+  const glassCategories = await getGlassesCategories();
 
   return (
     <div className="container w-full h-full mx-auto">
@@ -27,11 +28,11 @@ export default async function SystemPage({ params: { modelId } }: Params) {
         Configura tu ventana.
       </p>
       <div className="grid justify-center w-full grid-cols-1 gap-4 p-2 xl:grid-cols-2 ">
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={<Loader />}>
           <WindowPVCDraw model={model?.data.attributes.draw_ref} />
         </Suspense>
 
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={<Loader />}>
           <StepperProvider
             steps={[
               <StepOneLocation

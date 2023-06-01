@@ -1,15 +1,19 @@
-import { GlazingBeadGlassCaliber } from '../../Item/GlazingBead/GlazingBeadGlassCaliber.class';
-import { WindowCost } from '../../WindowCost/WindowCost.model';
-import { WindowModel } from '../../WindowModel/WindowModel.model';
-import { WindowModule, WindowPVC } from '../../WindowPVC/WindowPVC.model';
-import { IModelOXXO } from '../IModelOXXO.interface';
+import { GlazingBeadGlassCaliber } from "../../Item/GlazingBead/GlazingBeadGlassCaliber.class";
+import { WindowCost } from "../../WindowCost/WindowCost.model";
+import { WindowModel } from "../../WindowModel/WindowModel.model";
+import { WindowModule, WindowPVC } from "../../WindowPVC/WindowPVC.model";
+import { IModelOXXO } from "../IModelOXXO.interface";
 
 export class BellaSlidingModelOXXO implements IModelOXXO {
   window: WindowPVC;
   windowModel: WindowModel;
   windowCost: WindowCost = new WindowCost();
 
-  constructor(window: WindowPVC, windowModel: WindowModel, glazingBeadAndGlass: GlazingBeadGlassCaliber) {
+  constructor(
+    window: WindowPVC,
+    windowModel: WindowModel,
+    glazingBeadAndGlass: GlazingBeadGlassCaliber,
+  ) {
     this.window = window;
     this.windowModel = windowModel;
 
@@ -24,11 +28,17 @@ export class BellaSlidingModelOXXO implements IModelOXXO {
 
     // // // Set Glass cost and glazing bead cost
 
-     this.setGlassCost(this.window);
-     this.setGlazingBeadCost(this.window);
+    this.setGlassCost(this.window);
+    this.setGlazingBeadCost(this.window);
 
     // // // Set Accessories
     this.windowCost.accessoriesCost = windowModel.hardware_kit?.total ?? 0;
+
+    this.setCalculateCostWindow();
+  }
+
+  setCalculateCostWindow() {
+    this.window.setPrice(this.windowCost.getTotalCost());
   }
 
   // Set Main frame Cost
@@ -36,34 +46,47 @@ export class BellaSlidingModelOXXO implements IModelOXXO {
     const cutDiscount_mm = model.profile_frame.cuttingTransomSize * 2;
     const cutMetersDiscount = this.window.millimetersToMeters(cutDiscount_mm);
     // Widths PVC + Reinforcement
-    this.windowCost.frameCost += window.widthMeters * 2 * model.profile_frame.price;
     this.windowCost.frameCost +=
-      (window.widthMeters - cutMetersDiscount) * 2 * model.profile_frame.reinforcement_profile.price;
+      window.widthMeters * 2 * model.profile_frame.price;
+    this.windowCost.frameCost +=
+      (window.widthMeters - cutMetersDiscount) *
+      2 *
+      model.profile_frame.reinforcement_profile.price;
     // Heights PVC + Reinforcement
-    this.windowCost.frameCost += window.heightMeters * 2 * model.profile_frame.price;
     this.windowCost.frameCost +=
-      (window.heightMeters - cutMetersDiscount) * 2 * model.profile_frame.reinforcement_profile.price;
+      window.heightMeters * 2 * model.profile_frame.price;
+    this.windowCost.frameCost +=
+      (window.heightMeters - cutMetersDiscount) *
+      2 *
+      model.profile_frame.reinforcement_profile.price;
 
     // Screws
-    const cantScrewReinforcement = ((window.width - 200) / 300) * 2 + ((window.height - 200) / 300) * 2;
+    const cantScrewReinforcement =
+      ((window.width - 200) / 300) * 2 + ((window.height - 200) / 300) * 2;
     this.windowCost.miscCost +=
-      Math.ceil(cantScrewReinforcement) * model.profile_frame.reinforcement_profile.reinforcement_screw.price;
+      Math.ceil(cantScrewReinforcement) *
+      model.profile_frame.reinforcement_profile.reinforcement_screw.price;
   }
   // Transom
   public setVerticalTransom(baseWindow: WindowPVC, model: WindowModel) {
     if (model.profile_sash) {
       // Height PVC + Reinforcement
       const cantCuts = 2;
-      this.windowCost.transomCost += baseWindow.heightMeters * model.profile_sash.price * cantCuts;
       this.windowCost.transomCost +=
-        baseWindow.heightMeters * model.profile_sash.reinforcement_profile.price * cantCuts;
+        baseWindow.heightMeters * model.profile_sash.price * cantCuts;
+      this.windowCost.transomCost +=
+        baseWindow.heightMeters *
+        model.profile_sash.reinforcement_profile.price *
+        cantCuts;
       // Screws
       const cantScrewReinforcement = ((baseWindow.height - 200) / 300) * 2 * 2;
       this.windowCost.miscCost +=
-        Math.ceil(cantScrewReinforcement) * model.profile_frame.reinforcement_profile.reinforcement_screw.price;
+        Math.ceil(cantScrewReinforcement) *
+        model.profile_frame.reinforcement_profile.reinforcement_screw.price;
     }
 
-    const widthFixed = baseWindow.width / 4 + 22 - model.profile_frame.cuttingSashSize;
+    const widthFixed =
+      baseWindow.width / 4 + 22 - model.profile_frame.cuttingSashSize;
     const heightFixed = baseWindow.height - model.profile_frame.cuttingSashSize;
 
     const fixedModuleLeft = new WindowModule(widthFixed, heightFixed);
@@ -86,8 +109,10 @@ export class BellaSlidingModelOXXO implements IModelOXXO {
   }
   // Sash
   public setSash(windowModule: WindowModule, windowModel: WindowModel): void {
-    const widthSash = windowModule.width / 4 - 22 - windowModel.profile_frame.cuttingSashSize;
-    const heightSash = windowModule.height - windowModel.profile_frame.cuttingSashSize;
+    const widthSash =
+      windowModule.width / 4 - 22 - windowModel.profile_frame.cuttingSashSize;
+    const heightSash =
+      windowModule.height - windowModel.profile_frame.cuttingSashSize;
     const sashModuleOne = new WindowModule(widthSash, heightSash);
     const sashModuleTwo = new WindowModule(widthSash, heightSash);
     this.window.addSashModule(sashModuleOne);
@@ -110,16 +135,21 @@ export class BellaSlidingModelOXXO implements IModelOXXO {
       const cutsHeightSash = windowModule.heightMeters * 2;
       const priceWidthSash =
         cutsWidthSash *
-        (model.profile_sash.price + (model.profile_sash.reinforcement_profile.price - cutMetersDiscount));
+        (model.profile_sash.price +
+          (model.profile_sash.reinforcement_profile.price - cutMetersDiscount));
       const priceHeightSash =
         cutsHeightSash *
-        (model.profile_sash.price + (model.profile_sash.reinforcement_profile.price - cutMetersDiscount));
+        (model.profile_sash.price +
+          (model.profile_sash.reinforcement_profile.price - cutMetersDiscount));
 
       this.windowCost.sashCost += priceWidthSash + priceHeightSash;
       // Screws
-      const cantScrewReinforcement = ((windowModule.width - 200) / 300) * 2 + ((windowModule.height - 200) / 300) * 2;
+      const cantScrewReinforcement =
+        ((windowModule.width - 200) / 300) * 2 +
+        ((windowModule.height - 200) / 300) * 2;
       this.windowCost.miscCost +=
-        Math.ceil(cantScrewReinforcement) * model.profile_sash.reinforcement_profile.reinforcement_screw.price;
+        Math.ceil(cantScrewReinforcement) *
+        model.profile_sash.reinforcement_profile.reinforcement_screw.price;
     }
   }
 
@@ -132,7 +162,8 @@ export class BellaSlidingModelOXXO implements IModelOXXO {
           module.setGlazingBeadLength();
           module.setGlassArea();
           if (window.glazingBeadAndGlass && window.glazingBeadAndGlass.glass) {
-            this.windowCost.glassCost += module.glassArea * window.glazingBeadAndGlass.glass.price;
+            this.windowCost.glassCost +=
+              module.glassArea * window.glazingBeadAndGlass.glass.price;
           }
         });
       }
@@ -140,12 +171,17 @@ export class BellaSlidingModelOXXO implements IModelOXXO {
   }
 
   public setGlazingBeadCost(window: WindowPVC) {
-    if (window.glazingBeadAndGlass && window.glazingBeadAndGlass.glazingBead && window.glazingBeadProfile) {
+    if (
+      window.glazingBeadAndGlass &&
+      window.glazingBeadAndGlass.glazingBead &&
+      window.glazingBeadProfile
+    ) {
       const modules = window.sashModules.concat(window.fixedModules);
       if (modules.length) {
         modules.forEach((element) => {
           if (window.glazingBeadProfile)
-            this.windowCost.glazingBeadCost += element.glazingBeadLength * window.glazingBeadProfile.price;
+            this.windowCost.glazingBeadCost +=
+              element.glazingBeadLength * window.glazingBeadProfile.price;
         });
       }
     }

@@ -29,6 +29,11 @@ export class EverestModelZZW implements IModelZZW {
 
     // Set Accessories
     this.windowCost.accessoriesCost = windowModel.hardware_kit?.total ?? 0;
+      this.setCalculateCostWindow();
+  }
+
+  setCalculateCostWindow() {
+    this.window.setPrice(this.windowCost.getTotalCost());
   }
 
   // Set Main frame Cost

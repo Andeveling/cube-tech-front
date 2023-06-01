@@ -1,10 +1,9 @@
 import Card from "@/components/home/card";
-import { SystemsResponseT } from "@/models/System-PVC/SystemPVC.strapi";
 import Balancer from "react-wrap-balancer";
 import { getSystemsPVC } from "services/systems-pvc.service";
 
 export default async function Home() {
-  const systems: SystemsResponseT = await getSystemsPVC();
+  const systems = await getSystemsPVC();
 
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-xl px-5 mx-auto xl:px-0">

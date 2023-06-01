@@ -11,7 +11,7 @@ interface InitialState {
 }
 
 export interface CreateWindowDataI {
-  modelId: string | number;
+  modelId: ID;
   reference: string;
   location: string;
   width: number;

@@ -9,7 +9,6 @@ import {
 } from "@/lib/redux/features/quoteDocument/quoteSlice";
 import { ChevronLeft, Download, Minus, Plus, Trash } from "lucide-react";
 import Link from "next/link";
-
 import { v4 as uuidv4 } from "uuid";
 
 export default function SummaryPage() {

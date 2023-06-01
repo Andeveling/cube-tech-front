@@ -1,8 +1,9 @@
-import { Glass } from '../Item/Glass/Glass.model';
-import { GlazingBeadGlassCaliber } from '../Item/GlazingBead/GlazingBeadGlassCaliber.class';
-import { Profile } from '../Item/Profiles/Profile.model';
-import { IProfilePVC } from '../Item/Profiles/Profile.types';
-import { WindowModel } from '../WindowModel/WindowModel.model';
+import { Glass } from "../Item/Glass/Glass.model";
+import { GlazingBeadGlassCaliber } from "../Item/GlazingBead/GlazingBeadGlassCaliber.class";
+import { Profile } from "../Item/Profiles/Profile.model";
+import { IProfilePVC } from "../Item/Profiles/Profile.types";
+import { QuoteWindowCalculatedI } from "../QuoteWindowCalculated/QuoteWindowCalculated.interface";
+import { ID } from "../id.interface";
 
 export class Surface {
   width: number;
@@ -61,13 +62,22 @@ export class WindowModule extends Surface {
     }
   }
   setGlassArea() {
-    if (this.leftProfile && this.rightProfile && this.upProfile && this.downProfile) {
+    if (
+      this.leftProfile &&
+      this.rightProfile &&
+      this.upProfile &&
+      this.downProfile
+    ) {
       const widthMillimetersGlass: number =
-        this.width - (this.leftProfile.cuttingGlassSize + this.rightProfile.cuttingGlassSize);
+        this.width -
+        (this.leftProfile.cuttingGlassSize +
+          this.rightProfile.cuttingGlassSize);
       const heighMillimetersGlass: number =
-        this.height - (this.upProfile.cuttingGlassSize + this.downProfile.cuttingGlassSize);
+        this.height -
+        (this.upProfile.cuttingGlassSize + this.downProfile.cuttingGlassSize);
       this.glassArea =
-        this.millimetersToMeters(widthMillimetersGlass) * this.millimetersToMeters(heighMillimetersGlass);
+        this.millimetersToMeters(widthMillimetersGlass) *
+        this.millimetersToMeters(heighMillimetersGlass);
     }
   }
 
@@ -92,10 +102,16 @@ export class WindowModule extends Surface {
   }
 
   setHorizontalTransom(transomProfile: IProfilePVC) {
-    this.horizontalTransom = new CutProfile(transomProfile, this.width - transomProfile.cuttingTransomSize);
+    this.horizontalTransom = new CutProfile(
+      transomProfile,
+      this.width - transomProfile.cuttingTransomSize,
+    );
   }
   setVerticalTransom(transomProfile: IProfilePVC) {
-    this.horizontalTransom = new CutProfile(transomProfile, this.height - transomProfile.cuttingTransomSize);
+    this.horizontalTransom = new CutProfile(
+      transomProfile,
+      this.height - transomProfile.cuttingTransomSize,
+    );
   }
 
   // this function set Object with glass, and glazing bead
@@ -104,21 +120,64 @@ export class WindowModule extends Surface {
     this.glazingBeadProfile = glazingBeadAndGlass.glazingBead;
   }
   setGlazingBeadLength() {
-    if (this.leftProfile && this.rightProfile && this.upProfile && this.downProfile) {
+    if (
+      this.leftProfile &&
+      this.rightProfile &&
+      this.upProfile &&
+      this.downProfile
+    ) {
       const widthMillimeters =
-        this.width - (this.leftProfile.cuttingTransomSize + this.rightProfile.cuttingTransomSize);
-      const heighMillimeters = this.height - (this.upProfile.cuttingTransomSize + this.downProfile.cuttingTransomSize);
-      this.glazingBeadLength = this.millimetersToMeters((widthMillimeters + heighMillimeters) * 2);
+        this.width -
+        (this.leftProfile.cuttingTransomSize +
+          this.rightProfile.cuttingTransomSize);
+      const heighMillimeters =
+        this.height -
+        (this.upProfile.cuttingTransomSize +
+          this.downProfile.cuttingTransomSize);
+      this.glazingBeadLength = this.millimetersToMeters(
+        (widthMillimeters + heighMillimeters) * 2,
+      );
     }
   }
 }
 
 export class WindowPVC extends WindowModule {
+  id: ID 
+  reference: string;
+  location: string;
+  quantity: number;
+  system: string;
+  glassName: string;
   sashModules: WindowModule[] = [];
   fixedModules: WindowModule[] = [];
+  trm: number;
+  priceUSD: number = 0;
+  priceCOP: number = 0;
 
-  constructor(width: number, height: number) {
+  constructor(
+    id: ID,
+    reference: string,
+    location: string,
+    system: string,
+    width: number,
+    height: number,
+    quantity: number,
+    glassName: string,
+    trm: number,
+  ) {
     super(width, height);
+    this.id = id;
+    this.reference = reference;
+    this.location = location;
+    this.system = system;
+    this.quantity = quantity;
+    this.glassName = glassName;
+    this.trm = trm;
+  }
+
+  public setPrice(value: number) {
+    this.priceUSD = value;
+    this.priceCOP = this.priceUSD * this.trm
   }
 
   public addSashModule(windowModule: WindowModule) {
@@ -128,7 +187,22 @@ export class WindowPVC extends WindowModule {
   public addFixedModule(windowModule: WindowModule) {
     this.fixedModules.push(windowModule);
   }
-  private setKitAccessories(windowModel:WindowModel){}
+
+  getQuoteWindowInfo(): QuoteWindowCalculatedI {
+    return {
+      id: this.id,
+      reference: this.reference,
+      location: this.location,
+      system: this.system,
+      width: this.width,
+      height: this.height,
+      glassName: this.glassName,
+      quantity: this.quantity,
+      trm: this.trm,
+      priceUSD: this.priceUSD,
+      priceCOP: this.priceCOP
+    };
+  }
 }
 
 type TAngles = 90 | 45;

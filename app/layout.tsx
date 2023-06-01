@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import { inter, sfPro } from "./fonts";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import Loader from "@/components/shared/Loader";
 
 export const metadata = {
   title: "Arqustik - Soluciones termo-acusticas en tus ventanas",
@@ -26,7 +27,7 @@ export default async function RootLayout({ children }: Props) {
       <body className={cx(sfPro.variable, inter.variable)}>
         <Providers>
           {/* <div className="fixed w-full h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-100" /> */}
-          <Suspense fallback="...">
+          <Suspense fallback={<Loader />}>
             {/* @ts-expect-error Server Component */}
             <Nav />
           </Suspense>

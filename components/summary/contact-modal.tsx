@@ -1,4 +1,4 @@
-import { useCreateContactMutation } from "@/lib/redux/features/contact/contact.service";
+import { useCreateContactMutation } from "@/lib/redux/features/contact/contactApiSlice";
 import { ContactI } from "@/models/Contact/Contact.type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Download, X } from "lucide-react";

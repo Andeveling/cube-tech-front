@@ -5,7 +5,7 @@ import { fetchAPI } from '@/lib/utils';
 import { GlassCategoriesResponseT } from '@/models/GlassCategories/GlassCategory.strapi';
 
 
-export const getGlasses = async () => {
+export const getGlassesCategories = async () => {
   const path = `/glass-categories`;
   const urlParams = {
     sort: { createdAt: "desc" },

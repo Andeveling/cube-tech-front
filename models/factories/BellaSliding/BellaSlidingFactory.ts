@@ -15,7 +15,7 @@ export class BellaSlidingFactory implements ISlidingWindowAbstractFactory {
     windowModel: WindowModel,
     glazingBeadAndGlass: GlazingBeadGlassCaliber,
   ): IModelOXXO {
-    throw new BellaSlidingModelOXXO(window, windowModel, glazingBeadAndGlass);
+    return new BellaSlidingModelOXXO(window, windowModel, glazingBeadAndGlass);
   }
   createModelXO(window: WindowPVC, windowModel: WindowModel, glazingBeadAndGlass: GlazingBeadGlassCaliber): IModelXO {
     return new BellaSlidingModelXO(window, windowModel, glazingBeadAndGlass);
