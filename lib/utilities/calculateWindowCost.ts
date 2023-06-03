@@ -1,3 +1,4 @@
+import { AdminRules } from "@/models/AdminRules/AdminRules.class";
 import { BellaSlidingFactory } from "@/models/factories/BellaSliding/BellaSlidingFactory";
 import { EverestMaxFactory } from "@/models/factories/EverestMax/EverestMaxFactory";
 import { SystemsAvailableEnum } from "@/models/System-PVC/SystemPVC.interface";
@@ -6,9 +7,11 @@ import { WindowPVC } from "@/models/WindowPVC/WindowPVC.model";
 import { getGlassGlazingDeep } from "@/services/systems-pvc.service";
 import { getModelWindowPVCAdapted } from "@/services/windowModel.service";
 import { QuoteItemI } from "../redux/features/quoteDocument/quoteSlice";
-import type { TRM } from "@/models/TRM/TRM.class";
 
-export const calculateWindowCost = async (quoteItem: QuoteItemI, trm: TRM) => {
+export const calculateWindowCost = async (
+  quoteItem: QuoteItemI,
+  adminRules: AdminRules,
+) => {
   // console.log(quoteItem)
   try {
     const {
@@ -35,7 +38,9 @@ export const calculateWindowCost = async (quoteItem: QuoteItemI, trm: TRM) => {
     const windowModel = await getModelWindowPVCAdapted(modelId);
 
     const glassName = glazingBeadAndGlass.glass?.name;
-    const usdCop = trm.USDCOP;
+    const usdCop = adminRules.TRM;
+    const utility = adminRules.utility;
+
     const baseWindow = new WindowPVC(
       id,
       reference,
@@ -46,6 +51,7 @@ export const calculateWindowCost = async (quoteItem: QuoteItemI, trm: TRM) => {
       quantity,
       glassName || "",
       usdCop,
+      utility
     );
 
     switch (system) {

@@ -1,4 +1,5 @@
-import { Loader } from "lucide-react";
+import Loader from "@/components/shared/Loader";
+
 
 export default function RootLoading() {
   return <Loader />;

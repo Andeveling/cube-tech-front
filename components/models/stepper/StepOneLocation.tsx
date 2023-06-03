@@ -11,6 +11,7 @@ import {
 } from "@/lib/redux/features/createWindow/createWindowSlice";
 import { selectCountQuoteItems } from "@/lib/redux/features/quoteDocument/quoteSlice";
 import { ID } from "@/models/id.interface";
+import { SystemsAvailableEnum } from "@/models/System-PVC/SystemPVC.interface";
 import { WindowModelsEnum } from "@/models/windowPVC.model";
 
 import { useContext } from "react";
@@ -26,10 +27,10 @@ type FormData = {
 export const StepOneLocation = ({
   modelId,
   systemName,
-  model
+  model,
 }: {
   modelId: ID;
-  systemName: string;
+  systemName: SystemsAvailableEnum;
   model: WindowModelsEnum;
 }) => {
   const dispatch = useAppDispatch();
@@ -43,7 +44,7 @@ export const StepOneLocation = ({
     dispatch(generateReference(countItemsCount));
     dispatch(setModelWindowId(modelId));
     dispatch(setWindowSystem(systemName));
-    dispatch(setModelWidow(model))
+    dispatch(setModelWidow(model));
     handleNext();
   };
 
@@ -87,4 +88,12 @@ export const StepOneLocation = ({
   );
 };
 
-const locations = ["Alcoba", "Sala", "Cocina", "Patio", "Bano"];
+const locations = [
+  "Dormitorio",
+  "Sala",
+  "Cocina",
+  "Patio",
+  "Baño",
+  "Sala de juntas",
+  "Otro",
+];

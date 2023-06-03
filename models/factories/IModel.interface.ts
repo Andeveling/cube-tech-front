@@ -1,7 +1,7 @@
-import { QuoteWindowCalculated } from '../QuoteWindowCalculated/QuoteWindowCalculated.interface';
-import { WindowCost } from '../WindowCost/WindowCost.model';
-import { WindowModel } from '../WindowModel/WindowModel.model';
-import { WindowModule, WindowPVC } from '../WindowPVC/WindowPVC.model';
+import { QuoteWindowCalculatedI } from "../QuoteWindowCalculated/QuoteWindowCalculated.interface";
+import { WindowCost } from "../WindowCost/WindowCost.model";
+import { WindowModel } from "../WindowModel/WindowModel.model";
+import { WindowModule, WindowPVC } from "../WindowPVC/WindowPVC.model";
 
 export interface IModel {
   window: WindowPVC;

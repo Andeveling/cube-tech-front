@@ -1,4 +1,3 @@
-import { QuoteWindowCalculated } from "@/models/QuoteWindowCalculated/QuoteWindowCalculated.interface";
 import { GlazingBeadGlassCaliber } from "../../Item/GlazingBead/GlazingBeadGlassCaliber.class";
 import { WindowCost } from "../../WindowCost/WindowCost.model";
 import { WindowModel } from "../../WindowModel/WindowModel.model";

@@ -1,0 +1,43 @@
+{
+  "data": {
+    "id": 33,
+    "attributes": {
+      "fullName": "Andres Parra",
+      "address": "Carrera 25 #14-16",
+      "cellphone": "3007743602",
+      "email": "andeveling@gmail.com",
+      "createdAt": "2023-06-01T00:10:56.641Z",
+      "updatedAt": "2023-06-01T00:10:56.641Z",
+      "publishedAt": "2023-06-01T00:10:56.639Z",
+      "windowsQuote": [
+        {
+          "id": "7596cb60-c398-4148-b7ae-c8ccc9463fff",
+          "trm": 4404.87,
+          "width": 1200,
+          "height": 1000,
+          "system": "Bella-Sliding",
+          "location": "Alcoba",
+          "priceCOP": 343831.74808608,
+          "priceUSD": 78.057184,
+          "quantity": 2,
+          "glassName": "4mm+4mm Lam",
+          "reference": "V1"
+        },
+        {
+          "id": "a007440e-15a2-4793-af33-b367e2202b58",
+          "trm": 4404.87,
+          "width": 1200,
+          "height": 1000,
+          "system": "Bella-Sliding",
+          "location": "Sala",
+          "priceCOP": 346550.99767344,
+          "priceUSD": 78.67451200000001,
+          "quantity": 5,
+          "glassName": "5mm Tempered",
+          "reference": "V2"
+        }
+      ]
+    }
+  },
+  "meta": {}
+}

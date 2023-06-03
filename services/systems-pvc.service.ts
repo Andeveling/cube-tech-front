@@ -1,13 +1,18 @@
-
-import { GlazingBeadGlassResponse } from "../models/Item/GlazingBead/GlazingBeadGlassCaliber.types";
 import { GlazingGlassCaliberAdapter } from "../models/Item/GlazingBead/GlazingBeadGlassCaliber.adapter";
 import { fetchAPI } from "@/lib/utils";
-import { SystemResponseT, SystemsResponseT } from "@/models/System-PVC/SystemPVC.strapi";
+import { SystemAttributesT } from "@/models/System-PVC/SystemPVC.strapi";
 import { ID } from "@/models/id.interface";
+import {
+  CollectionStrapiResponse,
+  SingleStrapiResponse,
+} from "@/models/strapi/Global.response";
+import { GlazingBeadGlassAttributes } from "@/models/Item/GlazingBead/GlazingBeadGlassCaliber.strapi";
 
 export const getSystemsPVC = async () => {
   const path = `/system-pvcs`;
-  const response: Promise<SystemsResponseT> = await fetchAPI(path);
+  const response: Promise<CollectionStrapiResponse<SystemAttributesT>> =
+    await fetchAPI(path);
+
   return response;
 };
 
@@ -19,10 +24,8 @@ export const getSystemWithModelsPVC = async (systemId: ID) => {
     populate: "window_models",
   };
   // const options = { headers: { Authorization: `Bearer ${token}` } };
-  const responseData: Promise<SystemResponseT> = await fetchAPI(
-    path,
-    urlParams,
-  );
+  const responseData: Promise<SingleStrapiResponse<SystemAttributesT>> =
+    await fetchAPI(path, urlParams);
   return responseData;
 };
 
@@ -31,7 +34,7 @@ export const getGlassGlazingDeep = async (id: ID) => {
   const urlParams = {
     populate: "deep",
   };
-  const response: Promise<GlazingBeadGlassResponse> = await fetchAPI(
+  const response: Promise<SingleStrapiResponse<GlazingBeadGlassAttributes>> = await fetchAPI(
     path,
     urlParams,
   );

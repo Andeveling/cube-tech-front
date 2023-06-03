@@ -31,7 +31,7 @@ export default function SummaryPage() {
         <Heading>Resumen</Heading>
         <div className="place-self-end">
           {/* <InterestedModal/> */}
-          <Link href={"/summary/contact"} role="button" className="btn">
+          <Link href={"/summary/contact"} role="button" className="btn btn-primary">
             <Download size={25} className="mr-2" />
             Imprimir \ Descargar
           </Link>
@@ -109,7 +109,7 @@ export default function SummaryPage() {
                       <div className="flex items-center p-1 border-t">
                         {(itemQuotation.item.width / 1000) *
                           (itemQuotation.item.height / 1000)}
-                        m²
+                         m²
                       </div>
                       <div className="flex items-center p-1 border-t border-r">
                         Vidrio
@@ -128,7 +128,7 @@ export default function SummaryPage() {
                       </div>
                       <div className="grid items-center grid-cols-3 px-4 border-t border-b">
                         <button
-                          className="btn btn-sm"
+                          className="btn btn-sm btn-primary"
                           onClick={() =>
                             dispatch(decrementQuantity(itemQuotation.id))
                           }

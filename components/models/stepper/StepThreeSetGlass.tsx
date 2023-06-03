@@ -2,11 +2,10 @@
 import Heading from "@/components/shared/heading";
 import { useAppDispatch } from "@/lib/hooks/use-store-hooks";
 import { setWindowGlassData } from "@/lib/redux/features/createWindow/createWindowSlice";
-import {
-  GlassCategoriesResponseT,
-  GlassDatum,
-  GlassType,
-} from "@/models/GlassCategories/GlassCategory.strapi";
+import { GlassCategoriesAttributes } from "@/models/GlassCategories/GlassCategory.strapi";
+import { ID } from "@/models/id.interface";
+import { GlassType } from "@/models/Item/Glass/Glass.strapi";
+import { CollectionStrapiResponse } from "@/models/strapi/Global.response";
 
 import { RadioGroup, Tab } from "@headlessui/react";
 import { CheckCircle, Circle } from "lucide-react";
@@ -21,10 +20,10 @@ function classNames(...classes: string[]) {
 }
 
 type FormData = {
-  glassOption: GlassDatum["id"];
+  glassOption: ID;
 };
 type Props = {
-  glassCategories: GlassCategoriesResponseT;
+  glassCategories: CollectionStrapiResponse<GlassCategoriesAttributes>;
 };
 
 export const StepThreeSetGlass = ({ glassCategories }: Props) => {
@@ -76,7 +75,9 @@ export const StepThreeSetGlass = ({ glassCategories }: Props) => {
                     }
                   >
                     <GlassMiniImage glassType={category.attributes.glassType} />
-                    <span className="w-full mt-2">{category.attributes.name}</span>
+                    <span className="w-full mt-2">
+                      {category.attributes.name}
+                    </span>
                   </Tab>
                 ))}
               </Tab.List>

@@ -1,10 +1,24 @@
-export const QuoteFooter = () => {
+import { currencyCOPFormatter } from "@/lib/utilities/currencyFormatter";
+
+export const QuoteFooter = ({ subtotal }: { subtotal: number }) => {
   return (
-    <div >
-      <div className="my-2 break-after-auto break-before-auto break-inside-avoid ">
+    <div>
+      <p className="mt-6 mb-4 text-2xl text-center text-gray-500">
+        Términos y Condiciones
+      </p>
+      <div className="my-2 ">
         <p className="font-bold">Forma de Pago: </p>
-        <p>70% Anticipo.</p>
-        <p>30% Avance de Obra.</p>
+
+        <div className="grid max-w-md grid-cols-2">
+          <p>70% Anticipo.</p>
+          <b>{currencyCOPFormatter(subtotal * 0.7)}</b>
+        </div>
+
+        <div className="grid max-w-md grid-cols-2">
+          <p>30% Avance de Obra.</p>
+          <b>{currencyCOPFormatter(subtotal * 0.3)}</b>
+        </div>
+
         <p className="font-bold">Tiempo de entrega: </p>
         <span>
           A partir de 45 Días hábiles después de realizado el anticipo y
@@ -13,7 +27,7 @@ export const QuoteFooter = () => {
         <p className="font-bold">Validez de la oferta:</p>
         <span>5 días</span>
       </div>
-      <div className="mt-5 break-after-auto break-before-auto break-inside-avoid">
+      <div className="mt-5 ">
         <p className="font-bold">Notas:</p>
         <ul className="col-span-2">
           <li>
@@ -44,4 +58,4 @@ export const QuoteFooter = () => {
       </div>
     </div>
   );
-}
+};

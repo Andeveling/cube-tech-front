@@ -1,8 +1,8 @@
 import { calculateWindowCost } from "@/lib/utilities/calculateWindowCost";
+import { AdminRules } from "@/models/AdminRules/AdminRules.class";
 import { ContactI } from "@/models/Contact/Contact.type";
-import { TRM } from "@/models/TRM/TRM.class";
+import { getAdminRules } from "@/services/adminRules.service";
 import { createContact } from "@/services/contact.service";
-import { getTRM } from "@/services/trm.service";
 import { NextResponse } from "next/server";
 
 interface RequestBody {
@@ -18,13 +18,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "No tienes ventanas en la lista" });
     const { windowsQuote, fullName, cellphone, email, address } = contact;
 
-    console.log(windowsQuote)
-    const trm: TRM = await getTRM();
+
+  
+    const adminRules: AdminRules = await getAdminRules(); 
     // Calculate all windows
 
     const allWindowsCalculated = await Promise.all(
-      windowsQuote.map((itemQuote) => calculateWindowCost(itemQuote, trm)),
-    ).catch(error => console.error(error));
+      windowsQuote.map((itemQuote) =>
+        calculateWindowCost(itemQuote, adminRules),
+      ),
+    ).catch((error) => console.error(error));
     // console.log(allWindowsCalculated)
     const body = JSON.stringify({
       data: {

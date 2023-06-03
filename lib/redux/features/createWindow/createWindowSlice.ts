@@ -1,6 +1,7 @@
 import { AppState } from "@/lib/store/store";
-import { GlassDatum } from "@/models/GlassCategories/GlassCategory.strapi";
 import { ID } from "@/models/id.interface";
+import { GlassAttributes } from "@/models/Item/Glass/Glass.strapi";
+import { DataStrapi, SingleStrapiResponse } from "@/models/strapi/Global.response";
 import { SystemsAvailableEnum } from "@/models/System-PVC/SystemPVC.interface";
 import { WindowModelsEnum } from "@/models/windowPVC.model";
 import type { PayloadAction } from "@reduxjs/toolkit";
@@ -16,7 +17,7 @@ export interface CreateWindowDataI {
   location: string;
   width: number;
   height: number;
-  glassData: GlassDatum;
+  glassData: DataStrapi<GlassAttributes>;
   quantity: number;
   system: SystemsAvailableEnum;
   model: WindowModelsEnum;
@@ -29,7 +30,7 @@ const initialState: InitialState = {
     location: "",
     width: 1000,
     height: 1000,
-    glassData: {} as GlassDatum,
+    glassData: {} as DataStrapi<GlassAttributes>,
     quantity: 1,
     system: "" as SystemsAvailableEnum,
     model: "" as WindowModelsEnum,

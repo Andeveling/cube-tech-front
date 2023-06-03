@@ -1,10 +1,13 @@
-import { Glass } from '../Glass/Glass.model';
-import { ID } from '../Item.model';
-import { Profile } from '../Profiles/Profile.model';
-import { GlazingBeadGlassCaliber } from './GlazingBeadGlassCaliber.class';
-import { GlazingBeadGlassResponse } from './GlazingBeadGlassCaliber.types';
+import { SingleStrapiResponse } from "@/models/strapi/Global.response";
+import { Glass } from "../Glass/Glass.model";
+import { ID } from "../Item.model";
+import { Profile } from "../Profiles/Profile.model";
+import { GlazingBeadGlassCaliber } from "./GlazingBeadGlassCaliber.class";
+import { GlazingBeadGlassAttributes } from "./GlazingBeadGlassCaliber.strapi";
 
-export const GlazingGlassCaliberAdapter = (response: GlazingBeadGlassResponse): GlazingBeadGlassCaliber => {
+export const GlazingGlassCaliberAdapter = (
+  response: SingleStrapiResponse<GlazingBeadGlassAttributes>,
+): GlazingBeadGlassCaliber => {
   return new GlazingBeadGlassCaliber(
     new Glass(
       response.data.attributes.glass.data.id,

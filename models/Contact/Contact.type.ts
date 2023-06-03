@@ -10,3 +10,4 @@ export interface ContactI {
 export interface CreateContactI extends ContactI {
   terms: boolean;
 }
+

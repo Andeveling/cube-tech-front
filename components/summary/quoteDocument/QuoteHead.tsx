@@ -1,31 +1,39 @@
+import { ContactI } from "@/models/Contact/Contact.type";
 import Image from "next/image";
 
-export const QuoteHead = () => {
+export const QuoteHead = ({
+  fullName,
+  address,
+  cellphone,
+  email,
+}: Omit<ContactI, "windowsQuote">) => {
   return (
     <div>
-      <div className="flex justify-between">
+      <div className="flex items-center justify-between">
         <Image
           src="/assets/images/logo-arqustik-300x206.png"
           width={150}
           height={103}
           alt="Arqustik Logo"
         />
-        <div>
-          <p>{new Date().toLocaleDateString()}</p>
-        </div>
+        <p className="text-2xl text-gray-500">Cotización</p>
+
+        <p>{new Date().toLocaleDateString()}</p>
       </div>
       <div className="my-4 divider" />
       <div>
         <div className="grid max-w-xs grid-cols-2 my-4">
           <div className="">Nombre:</div>
-          <div>Andres Parra</div>
-          <div>Email:</div>
-          <div>andeveling@gmail.com</div>
+          <div>{fullName}</div>
+          <div>Dirección:</div>
+          <div>{address}</div>
+          <div>Correo:</div>
+          <div>{email}</div>
           <div>Celular:</div>
-          <div>300 774 3602</div>
+          <div>{cellphone}</div>
         </div>
         <div className="py-2">
-          <p className="text-justify">
+          <p className="text-left">
             De acuerdo a sus indicaciones, le presentamos la oferta de productos
             que solicitó. Agradecemos la confianza depositada en nuestra
             compañía y le invitamos a leer el contenido de esta propuesta.

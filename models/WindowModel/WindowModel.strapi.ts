@@ -1,40 +1,22 @@
-import { Meta } from "../strapi/Global.response";
-import { SystemResponseT } from "../System-PVC/SystemPVC.strapi";
+import { SingleStrapiResponse } from "../strapi/Global.response";
+import { SystemAttributesT } from "../System-PVC/SystemPVC.strapi";
 import { WindowModelsEnum } from "../windowPVC.model";
 
-export interface WindowsModelsResponse {
-  data: WindowModelResponseData[];
-  meta: Meta;
-}
-
-export interface WindowModelResponse {
-  data: WindowModelResponseData;
-  meta: Meta;
-}
-
-interface WindowModelResponseData {
-  id: number;
-  attributes: WindowModel;
-}
-
-interface WindowModel {
+export interface WindowModelAttributes {
   name: string;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
   draw_ref: WindowModelsEnum;
-  frame_profile: PVCProfileResponseData;
-  sash_profile: PVCProfileResponseData;
-  transom_profile: PVCProfileResponseData;
-  hardware_kit: HardwareKit;
-  system_pvc: SystemResponseT;
-}
-export interface HardwareKit {
-  data: HardwareKitData;
-}
-export interface HardwareKitData {
-  id: number;
-  attributes: HardwareAttributes;
+  maxH: number;
+  maxW: number;
+  minH: number;
+  minW: number;
+  frame_profile: SingleStrapiResponse<PVCProfileAttributes>;
+  sash_profile: SingleStrapiResponse<PVCProfileAttributes>;
+  transom_profile: SingleStrapiResponse<PVCProfileAttributes>;
+  hardware_kit: SingleStrapiResponse<HardwareAttributes>;
+  system_pvc: SingleStrapiResponse<SystemAttributesT>;
 }
 
 export interface HardwareAttributes {
@@ -43,18 +25,9 @@ export interface HardwareAttributes {
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
-  striker_quantities: Quantities;
-  mullion_quantities: Quantities;
-  cremona_quantities: Quantities;
-}
-
-interface Quantities {
-  data: AccessoryDataResponse[];
-}
-
-interface AccessoryDataResponse {
-  id: number;
-  attributes: AccessoriesAttributes;
+  striker_quantities: SingleStrapiResponse<AccessoriesAttributes>;
+  mullion_quantities: SingleStrapiResponse<AccessoriesAttributes>;
+  cremona_quantities: SingleStrapiResponse<AccessoriesAttributes>;
 }
 
 export interface AccessoriesAttributes {
@@ -62,18 +35,9 @@ export interface AccessoriesAttributes {
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
-  cremona: AccessoryResponseData;
-  mullion: AccessoryResponseData;
-  striker: AccessoryResponseData;
-}
-
-interface AccessoryResponseData {
-  data: AccessoryData;
-}
-
-interface AccessoryData {
-  id: number;
-  attributes: AccessoryAttributes;
+  cremona: SingleStrapiResponse<AccessoryAttributes>;
+  mullion: SingleStrapiResponse<AccessoryAttributes>;
+  striker: SingleStrapiResponse<AccessoryAttributes>;
 }
 
 interface AccessoryAttributes {
@@ -85,30 +49,6 @@ interface AccessoryAttributes {
   publishedAt: Date;
 }
 
-interface PVCProfileResponseData {
-  data: PVCProfileData;
-}
-interface ReinforcementResponseData { 
-  data: ReinforcementData;
-}
-interface ReinforcementScrewResponseData {
-  data: ReinforcementScrewData;
-}
-
-
-interface ReinforcementData  {
-  id: number;
-  attributes: ReinforcementProfileAttributes;
-};
-interface ReinforcementScrewData {
-  id: number;
-  attributes: ReinforcementScrewAttributes;
-}
-
-interface PVCProfileData {
-  id: number;
-  attributes: PVCProfileAttributes;
-}
 interface ReinforcementScrewAttributes {
   id_provider: string;
   name: string;
@@ -128,17 +68,15 @@ interface PVCProfileAttributes {
   cuttingTransomSize: number;
   cuttingGlassSize: number;
   cuttingSashSize: number;
-  reinforcement_profile: ReinforcementResponseData;
+  reinforcement_profile: SingleStrapiResponse<ReinforcementProfileAttributes>;
 }
 
-interface ReinforcementProfileAttributes  {
+interface ReinforcementProfileAttributes {
   id_provider: string;
   name: string;
   price: number;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
-  reinforcement_screw: ReinforcementScrewResponseData;
-};
-
-
+  reinforcement_screw: SingleStrapiResponse<ReinforcementScrewAttributes>;
+}

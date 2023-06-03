@@ -1,26 +1,15 @@
-import { Meta } from "../strapi/Global.response";
-import { WindowsModelsResponse } from "../WindowModel/WindowModel.strapi";
+import { CollectionStrapiResponse } from "../strapi/Global.response";
+import { WindowModelAttributes } from "../WindowModel/WindowModel.strapi";
+import { SystemsAvailableEnum } from "./SystemPVC.interface";
 
-export interface SystemsResponseT {
-  data: SystemDataT[];
-  meta: Meta;
+export interface SystemI {
+  name: SystemsAvailableEnum;
+  showName: string;
+  window_models: CollectionStrapiResponse<WindowModelAttributes>;
 }
 
-export interface SystemResponseT  {
-  data: SystemDataT;
-  meta: Meta;
-};
-
-export interface SystemDataT  {
-  id: number;
-  attributes: SystemAttributesT;
-};
-
-export interface SystemAttributesT {
-  name: string;
+export interface SystemAttributesT extends SystemI {
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
-  showName: string;
-  window_models: WindowsModelsResponse;
-};
+}

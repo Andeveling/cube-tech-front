@@ -1,8 +1,11 @@
 import { HardwareKit } from '../HardwareKit/HardwareKit.model';
+import { SingleStrapiResponse } from '../strapi/Global.response';
 import { ProfilePVC, ReinforcementProfilePVC, ReinforcementScrew, WindowModel } from './WindowModel.model';
-import { WindowModelResponse } from './WindowModel.strapi';
+import { WindowModelAttributes } from './WindowModel.strapi';
 
-export const WindowModelAdapter = (response: WindowModelResponse): WindowModel => {
+export const WindowModelAdapter = (
+  response: SingleStrapiResponse<WindowModelAttributes>,
+): WindowModel => {
   let sash = null;
   let transom = null;
   let hardware_kit = null;
@@ -68,7 +71,9 @@ export const WindowModelAdapter = (response: WindowModelResponse): WindowModel =
   }
 
   if (response.data.attributes.hardware_kit.data) {
-    hardware_kit = new HardwareKit(response.data.attributes.hardware_kit.data.attributes.total);
+    hardware_kit = new HardwareKit(
+      response.data.attributes.hardware_kit.data.attributes.total,
+    );
   }
 
   return new WindowModel(

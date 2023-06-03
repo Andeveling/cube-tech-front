@@ -1,6 +1,6 @@
 "use client";
 import useScroll from "@/lib/hooks/use-scroll";
-import { QuoteDocument } from "@/components/layout/Quote";
+import { QuoteDocumentIcon } from "@/components/layout/Quote";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -27,9 +27,8 @@ export default function NavBar() {
 
           <p>Arqustik Quoter</p>
         </Link>
-        <QuoteDocument />
+        <QuoteDocumentIcon />
       </nav>
-  
     </header>
   );
 }

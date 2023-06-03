@@ -3,7 +3,7 @@ import { FileText } from "lucide-react";
 import Link from "next/link";
 import { selectCountQuoteItems } from "../../lib/redux/features/quoteDocument/quoteSlice";
 
-export const QuoteDocument = () => {
+export const QuoteDocumentIcon = () => {
   const count = useAppSelector(selectCountQuoteItems);
   return (
     <Link href='/summary' className="indicator">

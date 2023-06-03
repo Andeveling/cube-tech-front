@@ -1,8 +1,10 @@
 import { fetchAPI } from "@/lib/utils";
 import { ID } from "@/models/id.interface";
-import { ModelResponseT } from "@/models/strapi/windowModel.response";
+import { SingleStrapiResponse } from "@/models/strapi/Global.response";
+
 import { WindowModelAdapter } from "@/models/WindowModel/WindowModel.adapter";
-import { WindowModelResponse } from "@/models/WindowModel/WindowModel.strapi";
+import { WindowModelAttributes } from "@/models/WindowModel/WindowModel.strapi";
+
 import { IModelWindow } from "../models/WindowModel/WindowModel.types";
 
 export const getModels = async () => {
@@ -23,7 +25,8 @@ export const getModelWindowPVC = async (modelId: ID) => {
     },
   };
   // const options = { headers: { Authorization: `Bearer ${token}` } };
-  const responseData: Promise<ModelResponseT> = await fetchAPI(path, urlParams);
+  const responseData: Promise<SingleStrapiResponse<WindowModelAttributes>> =
+    await fetchAPI(path, urlParams);
   return responseData;
 };
 
@@ -39,7 +42,8 @@ export const getModelWindowPvcWithSystem = async (modelId: ID) => {
     },
   };
   // const options = { headers: { Authorization: `Bearer ${token}` } };
-  const responseData: Promise<ModelResponseT> = await fetchAPI(path, urlParams);
+  const responseData: Promise<SingleStrapiResponse<WindowModelAttributes>> =
+    await fetchAPI(path, urlParams);
   return responseData;
 };
 
@@ -83,10 +87,8 @@ export const getModelWindowPVCAdapted = async (modelId: ID) => {
   };
   // const options = { headers: { Authorization: `Bearer ${token}` } };
 
-  const responseData: Promise<WindowModelResponse> = await fetchAPI(
-    path,
-    urlParams,
-  );
+  const responseData: Promise<SingleStrapiResponse<WindowModelAttributes>> =
+    await fetchAPI(path, urlParams);
   const modelData = await responseData;
 
   const modelAdapted = WindowModelAdapter(modelData);

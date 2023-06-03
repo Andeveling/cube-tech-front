@@ -142,7 +142,7 @@ export class WindowModule extends Surface {
 }
 
 export class WindowPVC extends WindowModule {
-  id: ID 
+  id: ID;
   reference: string;
   location: string;
   quantity: number;
@@ -153,6 +153,7 @@ export class WindowPVC extends WindowModule {
   trm: number;
   priceUSD: number = 0;
   priceCOP: number = 0;
+  utility: number;
 
   constructor(
     id: ID,
@@ -164,6 +165,7 @@ export class WindowPVC extends WindowModule {
     quantity: number,
     glassName: string,
     trm: number,
+    utility: number,
   ) {
     super(width, height);
     this.id = id;
@@ -173,11 +175,12 @@ export class WindowPVC extends WindowModule {
     this.quantity = quantity;
     this.glassName = glassName;
     this.trm = trm;
+    this.utility = utility;
   }
 
   public setPrice(value: number) {
-    this.priceUSD = value;
-    this.priceCOP = this.priceUSD * this.trm
+    this.priceUSD = value / (100 - this.utility) * 100;
+    this.priceCOP = this.priceUSD * this.trm;
   }
 
   public addSashModule(windowModule: WindowModule) {
@@ -200,7 +203,7 @@ export class WindowPVC extends WindowModule {
       quantity: this.quantity,
       trm: this.trm,
       priceUSD: this.priceUSD,
-      priceCOP: this.priceCOP
+      priceCOP: this.priceCOP,
     };
   }
 }
