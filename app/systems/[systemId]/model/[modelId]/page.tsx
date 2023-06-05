@@ -15,8 +15,10 @@ import Loader from "@/components/shared/Loader";
 type Params = { params: { modelId: string } };
 
 export default async function SystemPage({ params: { modelId } }: Params) {
-  const model = await getModelWindowPVC(modelId);
-  const glassCategories = await getGlassesCategories();
+  const [model, glassCategories] = await Promise.all([
+    getModelWindowPVC(modelId),
+    getGlassesCategories(),
+  ]);
 
   return (
     <div className="container w-full h-full mx-auto">

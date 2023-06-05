@@ -6,7 +6,7 @@ export default async function Home() {
   const systems = await getSystemsPVC();
 
   return (
-    <div className="flex flex-col items-center justify-center w-full max-w-xl px-5 mx-auto xl:px-0">
+    <div className="flex flex-col items-center justify-center w-full px-5 mx-auto xl:px-0">
       <h1
         className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-7xl md:leading-[5rem]"
         style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
@@ -23,10 +23,12 @@ export default async function Home() {
       <div className="grid grid-cols-1 gap-5 mt-10 md:grid-cols-2">
         {systems.data.map((item) => (
           <Card
-            key={item.id}
             id={item.id}
+            key={item.id}
             title={item.attributes.showName}
-            description="Ventanas Europeas"
+            description={item.attributes.description}
+            imageUrl={item.attributes.imageUrl}
+            features={item.attributes.features}
           />
         ))}
       </div>

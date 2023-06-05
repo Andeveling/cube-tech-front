@@ -1,4 +1,5 @@
 import { Meta } from "../strapi/Global.response";
+import { WindowModelsEnum } from "../windowPVC.model";
 import { ContactI } from "./Contact.type";
 
 export interface ContactResponse {
@@ -30,4 +31,5 @@ interface WindowsQuote {
   quantity: number;
   glassName: string;
   reference: string;
+  model: WindowModelsEnum;
 }

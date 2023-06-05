@@ -45,13 +45,14 @@ export const calculateWindowCost = async (
       id,
       reference,
       location,
+      model,
       system,
       width,
       height,
       quantity,
       glassName || "",
       usdCop,
-      utility
+      utility,
     );
 
     switch (system) {

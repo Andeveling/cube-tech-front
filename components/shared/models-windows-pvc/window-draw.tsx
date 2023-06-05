@@ -1,5 +1,6 @@
 import { WindowModelsEnum } from "@/models/windowPVC.model";
 import ModelO from "./Windows/ModelO";
+import ModelOXXO from "./Windows/ModelOXXO";
 import ModelVLeft from "./Windows/ModelVLeft";
 import ModelVO from "./Windows/ModelVO";
 import ModelVV from "./Windows/ModelVV";
@@ -25,8 +26,8 @@ const WindowDraw = ({
     //   return <ModelOXX width={width} height={height} />;
     // case WindowModelsEnum.XXO:
     //   return <ModelXXO width={width} height={height} />;
-    // case WindowModelsEnum.OXXO:
-    //   return <ModelOXXO width={width} height={height} />;
+    case WindowModelsEnum.OXXOW:
+      return <ModelOXXO width={width} height={height} />;
     // case WindowModelsEnum.XXX:
     //   return <ModelXXX width={width} height={height} />;
     case WindowModelsEnum.O:

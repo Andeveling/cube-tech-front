@@ -1,12 +1,11 @@
 "use client";
 import { ContactResponse } from "@/models/Contact/Contact.strapi";
+import { Printer } from "lucide-react";
 import { useRef } from "react";
-import toast from "react-hot-toast";
+import { useReactToPrint } from "react-to-print";
 import { QuoteBody } from "./QuoteBody";
 import { QuoteFooter } from "./QuoteFooter";
 import { QuoteHead } from "./QuoteHead";
-import { useReactToPrint } from "react-to-print";
-import { Printer } from "lucide-react";
 
 export const QuoteDocument = ({
   contactData,
@@ -19,7 +18,6 @@ export const QuoteDocument = ({
     },
     0,
   );
-
   const componentRef = useRef(null);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -28,12 +26,17 @@ export const QuoteDocument = ({
       // toast.success("Presupuesto generado correctamente.");
     },
   });
+
   return (
-    <div className="px-4 mx-auto text-xl max-w-7xl print:text-lg" ref={componentRef}>
+    <div
+      className="px-4 mx-auto text-xl max-w-7xl print:text-lg"
+      ref={componentRef}
+    >
       <div className="flex justify-end mb-4 print:hidden">
         <button onClick={handlePrint} className="btn btn-outline">
           <Printer /> Imprimir
         </button>
+   
       </div>
       <QuoteHead
         fullName={contactData.data.attributes.fullName}

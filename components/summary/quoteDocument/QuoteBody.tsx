@@ -1,3 +1,4 @@
+import WindowDraw from "@/components/shared/models-windows-pvc/window-draw";
 import { currencyCOPFormatter } from "@/lib/utilities/currencyFormatter";
 import { ContactResponse } from "@/models/Contact/Contact.strapi";
 import { QuoteWindowCalculatedI } from "@/models/QuoteWindowCalculated/QuoteWindowCalculated.interface";
@@ -16,15 +17,14 @@ export const QuoteBody = ({
         <div className="grid justify-center w-full grid-cols-1">
           {windowsQuote.map((item, index) => {
             return (
-              <div
-                key={item.id}
-                className=""
-              >
+              <div key={item.id} className="">
                 <div className="relative mb-4 text-3xl font-thin text-center">
                   Item {index + 1}
                 </div>
                 <div className="grid justify-center w-full grid-cols-1 space-x-2 md:grid-cols-2 print:grid-cols-2">
-                  <div className="flex justify-center bg-black border shadow-lg place-self-center w-96 h-96"></div>
+                  <div className="flex justify-center bg-black border shadow-lg place-self-center w-96 h-96">
+                    <WindowDraw height={0} width={0} model={item.model} />
+                  </div>
 
                   <div>
                     <div className="grid max-w-lg grid-cols-2 mx-auto mt-4 text-xl print:text-lg md:mt-0">

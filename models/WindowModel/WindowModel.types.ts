@@ -1,10 +1,11 @@
 import type { IMisc } from '../Item/Misc/Misc.types';
 import type { IProfile } from '../Item/Profiles/Profile.types';
+import { WindowModelsEnum } from '../windowPVC.model';
 
 export interface IModelWindow {
   id: number;
   system: string;
-  modelDraw: WindowsModelsEnum;
+  modelDraw: WindowModelsEnum;
   typeWin: TypeWindowEnum;
   profiles: IGroupProfiles;
   misc: IMisc[];
@@ -26,10 +27,4 @@ export enum TypeWindowEnum {
   door = 'door',
 }
 
-export enum WindowsModelsEnum {
-  O = 'O',
-  ZW = 'ZW',
-  TW = 'TW',
-  ZD = 'ZD',
-  TD = 'TD',
-}
+

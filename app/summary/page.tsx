@@ -1,11 +1,12 @@
 "use client";
 import Heading from "@/components/shared/heading";
+import WindowDraw from "@/components/shared/models-windows-pvc/window-draw";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/use-store-hooks";
 import {
   decrementQuantity,
   incrementQuantity,
   removeWindowFromQuote,
-  selectQuoteItems
+  selectQuoteItems,
 } from "@/lib/redux/features/quoteDocument/quoteSlice";
 import { ChevronLeft, Download, Minus, Plus, Trash } from "lucide-react";
 import Link from "next/link";
@@ -31,7 +32,11 @@ export default function SummaryPage() {
         <Heading>Resumen</Heading>
         <div className="place-self-end">
           {/* <InterestedModal/> */}
-          <Link href={"/summary/contact"} role="button" className="btn btn-primary">
+          <Link
+            href={"/summary/contact"}
+            role="button"
+            className="btn btn-primary"
+          >
             <Download size={25} className="mr-2" />
             Imprimir \ Descargar
           </Link>
@@ -40,6 +45,20 @@ export default function SummaryPage() {
       <p className="text-center text-gray-500 animate-fade-up md:text-2xl">
         Listado de ventanas:
       </p>
+      {/* Test */}
+      <button
+        className="btn btn-info"
+        onClick={async () => {
+          fetch("/api/test", {
+            method: "POST",
+          })
+            .then((res) => res.json())
+            .then((data) => console.log(data));
+        }}
+      >
+        SendHTML
+      </button>
+
       <div className="divider" />
       <div className="flex justify-center w-full">
         <div className="grid justify-center w-full grid-cols-1">
@@ -90,7 +109,13 @@ export default function SummaryPage() {
                     </div>
                   </div>
                   <div className="grid justify-center w-full grid-cols-2 space-x-2">
-                    <div className="flex justify-center bg-black border shadow-lg place-self-center w-96 h-96"></div>
+                    <div className="flex justify-center bg-black border shadow-lg place-self-center w-96 h-96">
+                      <WindowDraw
+                        height={0}
+                        width={0}
+                        model={itemQuotation.item.model}
+                      />
+                    </div>
                     <div className="grid max-w-lg grid-cols-2 mx-auto text-xl">
                       <h3 className="col-span-2 mt-1 text-center">
                         {itemQuotation.item.reference} |{" "}
@@ -109,7 +134,7 @@ export default function SummaryPage() {
                       <div className="flex items-center p-1 border-t">
                         {(itemQuotation.item.width / 1000) *
                           (itemQuotation.item.height / 1000)}
-                         m²
+                        m²
                       </div>
                       <div className="flex items-center p-1 border-t border-r">
                         Vidrio
@@ -170,5 +195,3 @@ export default function SummaryPage() {
     </div>
   );
 }
-
-

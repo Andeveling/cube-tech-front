@@ -4,6 +4,8 @@ import { Profile } from "../Item/Profiles/Profile.model";
 import { IProfilePVC } from "../Item/Profiles/Profile.types";
 import { QuoteWindowCalculatedI } from "../QuoteWindowCalculated/QuoteWindowCalculated.interface";
 import { ID } from "../id.interface";
+import { WindowModelsEnum } from "../windowPVC.model";
+
 
 export class Surface {
   width: number;
@@ -148,6 +150,7 @@ export class WindowPVC extends WindowModule {
   quantity: number;
   system: string;
   glassName: string;
+  model: WindowModelsEnum;
   sashModules: WindowModule[] = [];
   fixedModules: WindowModule[] = [];
   trm: number;
@@ -159,6 +162,7 @@ export class WindowPVC extends WindowModule {
     id: ID,
     reference: string,
     location: string,
+    model: WindowModelsEnum,
     system: string,
     width: number,
     height: number,
@@ -171,6 +175,7 @@ export class WindowPVC extends WindowModule {
     this.id = id;
     this.reference = reference;
     this.location = location;
+    this.model = model;
     this.system = system;
     this.quantity = quantity;
     this.glassName = glassName;
@@ -179,7 +184,7 @@ export class WindowPVC extends WindowModule {
   }
 
   public setPrice(value: number) {
-    this.priceUSD = value / (100 - this.utility) * 100;
+    this.priceUSD = (value / (100 - this.utility)) * 100;
     this.priceCOP = this.priceUSD * this.trm;
   }
 
@@ -204,6 +209,7 @@ export class WindowPVC extends WindowModule {
       trm: this.trm,
       priceUSD: this.priceUSD,
       priceCOP: this.priceCOP,
+      model: this.model,
     };
   }
 }
