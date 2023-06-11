@@ -13,6 +13,7 @@ export const contactApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: contactBody,
       }),
+
       invalidatesTags: ["Contacts"],
     }),
   }),

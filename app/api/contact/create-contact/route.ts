@@ -4,6 +4,7 @@ import { ContactI } from "@/models/Contact/Contact.type";
 import { QuoteWindowCalculatedI } from "@/models/QuoteWindowCalculated/QuoteWindowCalculated.interface";
 import { getAdminRules } from "@/services/adminRules.service";
 import { createContact } from "@/services/contact.service";
+
 import { NextResponse } from "next/server";
 
 interface RequestBody {
@@ -41,6 +42,7 @@ export async function POST(request: Request) {
     /* Generar PDF */
 
     /* Enviar mail */
+  
 
 
 

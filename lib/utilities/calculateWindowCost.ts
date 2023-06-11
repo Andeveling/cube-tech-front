@@ -25,13 +25,13 @@ export const calculateWindowCost = async (
         reference,
         location,
         quantity,
-        glassData: {
-          attributes: { glass_glazing_bead_system },
-        },
+        glassData,
       },
     } = quoteItem;
 
-    const glassAndGlazingBeadId = glass_glazing_bead_system.data.id;
+    if (!glassData) throw new Error("Codigo de Cristal invalido");
+    const glassAndGlazingBeadId =
+      glassData.attributes.glass_glazing_bead_system.data.id;
     const glazingBeadAndGlass = await getGlassGlazingDeep(
       glassAndGlazingBeadId,
     );
