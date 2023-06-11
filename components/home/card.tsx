@@ -4,6 +4,7 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import Balancer from "react-wrap-balancer";
 import Image from "next/image";
+import Heading from "../shared/heading";
 
 interface Props {
   id: string | number;
@@ -30,10 +31,12 @@ export default function Card({
         <Image src={imageUrl} alt={`${title} image`} width={400} height={200} />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">
-          {title}
-          <div className="badge badge-outline ">Europeas</div>
-        </h2>
+        <div className="card-title">
+          <Heading as="h3" className="card-title">
+            {title}
+          </Heading>
+          <div className="badge badge-outline">Europea</div>
+        </div>
         <p>{description}</p>
         <div className="justify-center card-actions">
           {features.map((feature) => (

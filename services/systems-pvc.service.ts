@@ -20,10 +20,8 @@ export const getSystemWithModelsPVC = async (systemId: ID) => {
   const id = systemId;
   const path = `/system-pvcs/${id}`;
   const urlParams = {
-    // sort: { id: "desc" },
     populate: "window_models",
   };
-  // const options = { headers: { Authorization: `Bearer ${token}` } };
   const responseData: Promise<SingleStrapiResponse<SystemAttributesT>> =
     await fetchAPI(path, urlParams);
   return responseData;
@@ -34,10 +32,8 @@ export const getGlassGlazingDeep = async (id: ID) => {
   const urlParams = {
     populate: "deep",
   };
-  const response: Promise<SingleStrapiResponse<GlazingBeadGlassAttributes>> = await fetchAPI(
-    path,
-    urlParams,
-  );
+  const response: Promise<SingleStrapiResponse<GlazingBeadGlassAttributes>> =
+    await fetchAPI(path, urlParams);
   const data = await response;
   const glazingAdapted = GlazingGlassCaliberAdapter(data);
   return glazingAdapted;

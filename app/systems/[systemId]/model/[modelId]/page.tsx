@@ -4,7 +4,7 @@ import StepperProvider from "@/components/models/stepper/StepperContext";
 import { StepThreeSetGlass } from "@/components/models/stepper/StepThreeSetGlass";
 import { StepTwoDimensions } from "@/components/models/stepper/StepTwoDimensions";
 import { WindowCreateStepper } from "@/components/models/stepper/WindowCreateStepper";
-import { WindowPVCDraw } from "@/components/models/stepper/WindowPVCDraw";
+import { WindowPVCDrawStepper } from "@/components/models/stepper/WindowPVCDraw";
 import Heading from "@/components/shared/heading";
 import { Suspense } from "react";
 import { getGlassesCategories } from "@/services/glass.service";
@@ -31,10 +31,10 @@ export default async function SystemPage({ params: { modelId } }: Params) {
       </p>
       <div className="grid justify-center w-full grid-cols-1 gap-4 p-2 xl:grid-cols-2 ">
         <Suspense fallback={<Loader />}>
-          <WindowPVCDraw model={model?.data.attributes.draw_ref} />
-        </Suspense>
+          <div className="flex">
+            <WindowPVCDrawStepper model={model?.data.attributes.draw_ref} />
+          </div>
 
-        <Suspense fallback={<Loader />}>
           <StepperProvider
             steps={[
               <StepOneLocation

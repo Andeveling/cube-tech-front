@@ -1,7 +1,8 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/use-store-hooks";
 import {
-  selectCurrentWindow
+  resetWindowState,
+  selectCurrentWindow,
 } from "@/lib/redux/features/createWindow/createWindowSlice";
 import { addWindowToQuote } from "@/lib/redux/features/quoteDocument/quoteSlice";
 import Link from "next/link";
@@ -18,13 +19,14 @@ export const HandleStepper = () => {
   const handleWindowCreated = () => {
     notify();
     dispatch(addWindowToQuote(currentWindowCreate));
+    dispatch(resetWindowState());
   };
 
   return (
     <div className="w-full mt-10">
-      <div className="flex justify-between w-full h-20 px-10">
+      <div className="flex justify-between w-full h-20 px-2 sm:px-10">
         <button
-          className="btn"
+          className="btn btn-primary"
           type="button"
           onClick={handleBack}
           disabled={currentStep === 0}

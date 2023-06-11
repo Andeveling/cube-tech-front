@@ -22,7 +22,7 @@ export const QuoteBody = ({
                   Item {index + 1}
                 </div>
                 <div className="grid justify-center w-full grid-cols-1 space-x-2 md:grid-cols-2 print:grid-cols-2">
-                  <div className="flex justify-center bg-black border shadow-lg place-self-center w-96 h-96">
+                  <div className="flex justify-center border shadow-lg place-self-center w-80 h-80 print:h-52 print:w-52">
                     <WindowDraw height={0} width={0} model={item.model} />
                   </div>
 

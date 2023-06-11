@@ -22,7 +22,7 @@ export default function SummaryPage() {
 
   return (
     <div className="container mx-auto">
-      <div className="grid justify-between grid-cols-3">
+      <div className="grid justify-between grid-cols-1 md:grid-cols-3">
         <div>
           <Link role="button" href="/" className="btn btn-link">
             <ChevronLeft size={25} />
@@ -30,23 +30,25 @@ export default function SummaryPage() {
           </Link>
         </div>
         <Heading>Resumen</Heading>
-        <div className="place-self-end">
+        <div className="my-3 place-self-center md:my-0 md:place-self-end">
           {/* <InterestedModal/> */}
-          <Link
-            href={"/summary/contact"}
-            role="button"
-            className="btn btn-primary"
-          >
-            <Download size={25} className="mr-2" />
-            Imprimir \ Descargar
-          </Link>
+          {windowsQuote.length > 0 && (
+            <Link
+              href={"/summary/contact"}
+              role="button"
+              className="btn btn-primary"
+            >
+              <Download size={25} className="mr-2" />
+              Imprimir \ Descargar
+            </Link>
+          )}
         </div>
       </div>
       <p className="text-center text-gray-500 animate-fade-up md:text-2xl">
         Listado de ventanas:
       </p>
       {/* Test */}
-      <button
+      {/* <button
         className="btn btn-info"
         onClick={async () => {
           fetch("/api/test", {
@@ -57,7 +59,7 @@ export default function SummaryPage() {
         }}
       >
         SendHTML
-      </button>
+      </button> */}
 
       <div className="divider" />
       <div className="flex justify-center w-full">
@@ -72,7 +74,7 @@ export default function SummaryPage() {
                     {/* Modal */}
                     <label
                       htmlFor={modalId}
-                      className="absolute top-0 right-0 btn-primary btn btn-circle btn-outline"
+                      className="absolute top-0 right-2 md:right-0 btn-primary btn btn-circle btn-outline"
                     >
                       <Trash size={25} />
                     </label>
@@ -108,15 +110,15 @@ export default function SummaryPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="grid justify-center w-full grid-cols-2 space-x-2">
-                    <div className="flex justify-center bg-black border shadow-lg place-self-center w-96 h-96">
+                  <div className="grid justify-center w-full grid-cols-1 space-x-2 xl:grid-cols-2">
+                    <div className="flex justify-center px-2 border place-self-center w-96 h-96 sm:px-0">
                       <WindowDraw
                         height={0}
                         width={0}
                         model={itemQuotation.item.model}
                       />
                     </div>
-                    <div className="grid max-w-lg grid-cols-2 mx-auto text-xl">
+                    <div className="grid max-w-lg grid-cols-2 mx-auto mt-4 text-xl sm:mt-0">
                       <h3 className="col-span-2 mt-1 text-center">
                         {itemQuotation.item.reference} |{" "}
                         {itemQuotation.item.location}

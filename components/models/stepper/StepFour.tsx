@@ -29,7 +29,9 @@ export const StepFour = () => {
         </div>
         <div className="p-2 border-t border-r">Vidrio</div>
         <div className="p-2 border-t">
-          {currentWindow.glassData.attributes.nameUI || ''}
+          {(currentWindow.glassData &&
+            currentWindow.glassData.attributes.nameUI) ||
+            ""}
         </div>
 
         <div className="p-2 border-t border-r">Color</div>

@@ -17,6 +17,7 @@ export interface WindowModelAttributes {
   transom_profile: SingleStrapiResponse<PVCProfileAttributes>;
   hardware_kit: SingleStrapiResponse<HardwareAttributes>;
   system_pvc: SingleStrapiResponse<SystemAttributesT>;
+  isDoor: boolean
 }
 
 export interface HardwareAttributes {

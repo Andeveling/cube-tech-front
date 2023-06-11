@@ -17,15 +17,9 @@ export default function NavBar() {
     >
       <nav className="flex items-center justify-between h-20 max-w-screen-xl mx-5 xl:mx-auto">
         <Link href="/" className="flex items-center text-2xl font-display">
-          <Image
-            src="/logo.png"
-            alt="Precedent logo"
-            width="30"
-            height="30"
-            className="mr-2 rounded-sm"
-          ></Image>
-
-          <p>Arqustik Quoter</p>
+          <p className="bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent  drop-shadow-sm">
+            Arqustik V 1.0
+          </p>
         </Link>
         <QuoteDocumentIcon />
       </nav>

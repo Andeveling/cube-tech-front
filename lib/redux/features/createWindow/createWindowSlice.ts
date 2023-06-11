@@ -17,7 +17,7 @@ export interface CreateWindowDataI {
   location: string;
   width: number;
   height: number;
-  glassData: DataStrapi<GlassAttributes>;
+  glassData: null|DataStrapi<GlassAttributes>;
   quantity: number;
   system: SystemsAvailableEnum;
   model: WindowModelsEnum;
@@ -28,9 +28,10 @@ const initialState: InitialState = {
     modelId: "",
     reference: "V",
     location: "",
-    width: 1000,
-    height: 1000,
-    glassData: {} as DataStrapi<GlassAttributes>,
+    width: 0,
+    height: 0,
+    glassData: null,
+
     quantity: 1,
     system: "" as SystemsAvailableEnum,
     model: "" as WindowModelsEnum,

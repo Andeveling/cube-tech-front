@@ -1,6 +1,6 @@
 const ModelXO = ({ width, height }: { width: number; height: number }) => {
   return (
-    <div className="flex items-center justify-center w-full h-full bg-white border border-white print:h-52 print:w-52">
+    <div className="flex items-center justify-center w-full h-full bg-white border border-gray-300 print:h-52 print:w-52">
       <div
         className="grid grid-cols-2 border border-white "
         style={{ height: "96%", width: "96%" }}

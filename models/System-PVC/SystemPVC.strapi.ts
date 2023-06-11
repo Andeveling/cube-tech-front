@@ -7,6 +7,8 @@ export interface SystemI {
   showName: string;
   window_models: CollectionStrapiResponse<WindowModelAttributes>;
   imageUrl: string;
+  imageWindow: string
+  imageDoor: string
   description: string;
   features: string[];
 }

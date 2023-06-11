@@ -50,7 +50,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Cotizacion */}
-      {isSuccess && contactData ? (
+      {contactData ? (
         <QuoteDocument contactData={contactData} />
       ) : (
         <div className="max-w-sm mx-auto text-center">

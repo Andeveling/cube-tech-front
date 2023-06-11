@@ -5,10 +5,15 @@ import { selectCurrentWindow } from "@/lib/redux/features/createWindow/createWin
 
 import { WindowModelsEnum } from "@/models/windowPVC.model";
 
-export const WindowPVCDraw = ({ model }: { model: WindowModelsEnum }) => {
-  const { reference, location } = useAppSelector(selectCurrentWindow);
+export const WindowPVCDrawStepper = ({
+  model,
+}: {
+  model: WindowModelsEnum;
+}) => {
+  const { reference, location, width, height, glassData } =
+    useAppSelector(selectCurrentWindow);
   return (
-    <div className="flex flex-col items-center justify-center mx-auto h-[600px] w-[600px]">
+    <div className="flex flex-col items-center justify-center mx-auto">
       {reference && location ? (
         <h2 className="mb-3 text-2xl">
           {reference} | {location}
@@ -16,11 +21,18 @@ export const WindowPVCDraw = ({ model }: { model: WindowModelsEnum }) => {
       ) : (
         <h2 className="mb-3 text-2xl">Referencia</h2>
       )}
-
-      <div className="w-full h-full border border-gray-300 shadow-md">
+      <div className="relative  border border-gray-300 shadow-md h-[500px] w-[500px]">
+        {glassData && (<div className="absolute z-10 top-6 left-4 badge badge-primary">
+          Cristal: {glassData.attributes.nameUI}
+        </div>)}
         <WindowDraw height={0} width={0} model={model} />
+        <div className="absolute -right-6 badge badge-primary top-1/2">
+          {width}mm
+        </div>
+        <div className="absolute left-[45%] badge badge-primary -bottom-7">
+          {height}mm
+        </div>
       </div>
-      <div className="divider">1000 mm</div>
     </div>
   );
 };
