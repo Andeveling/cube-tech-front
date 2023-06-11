@@ -53,6 +53,9 @@ export const quoteSlice = createSlice({
         windowItem.item.quantity -= 1;
       }
     },
+    resetQuote: (state) => {
+      return initialState;
+    },
   },
 });
 
@@ -62,6 +65,7 @@ export const {
   removeWindowFromQuote,
   incrementQuantity,
   decrementQuantity,
+  resetQuote,
 } = quoteSlice.actions;
 /* Selectors */
 export const selectQuoteItems = (state: AppState) => state.quote.quoteState;

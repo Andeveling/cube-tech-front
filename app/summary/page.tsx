@@ -47,19 +47,6 @@ export default function SummaryPage() {
       <p className="text-center text-gray-500 animate-fade-up md:text-2xl">
         Listado de ventanas:
       </p>
-      {/* Test */}
-      {/* <button
-        className="btn btn-info"
-        onClick={async () => {
-          fetch("/api/test", {
-            method: "POST",
-          })
-            .then((res) => res.json())
-            .then((data) => console.log(data));
-        }}
-      >
-        SendHTML
-      </button> */}
 
       <div className="divider" />
       <div className="flex justify-center w-full">
@@ -111,68 +98,72 @@ export default function SummaryPage() {
                     </div>
                   </div>
                   <div className="grid justify-center w-full grid-cols-1 space-x-2 xl:grid-cols-2">
-                    <div className="flex justify-center px-2 border place-self-center w-96 h-96 sm:px-0">
+                    <div className="flex justify-center px-2 place-self-center w-96 h-96 sm:px-0">
                       <WindowDraw
                         height={0}
                         width={0}
                         model={itemQuotation.item.model}
                       />
                     </div>
-                    <div className="grid max-w-lg grid-cols-2 mx-auto mt-4 text-xl sm:mt-0">
-                      <h3 className="col-span-2 mt-1 text-center">
-                        {itemQuotation.item.reference} |{" "}
-                        {itemQuotation.item.location}
-                      </h3>
-                      <div className="flex items-center p-1 border-t border-r">
-                        Dimesiones
-                      </div>
-                      <div className="flex items-center p-1 border-t">
-                        {itemQuotation.item.width}mm x{" "}
-                        {itemQuotation.item.height}mm
-                      </div>
-                      <div className="flex items-center p-1 border-t border-r">
-                        Area
-                      </div>
-                      <div className="flex items-center p-1 border-t">
-                        {(itemQuotation.item.width / 1000) *
-                          (itemQuotation.item.height / 1000)}
-                        m²
-                      </div>
-                      <div className="flex items-center p-1 border-t border-r">
-                        Vidrio
-                      </div>
-                      <div className="flex items-center p-1 border-t">
-                        {itemQuotation.item.glassData?.attributes.nameUI}
-                      </div>
-                      <div className="flex items-center p-1 border-t border-r">
-                        Color
-                      </div>
-                      <div className="flex items-center p-1 border-t">
-                        Blanco
-                      </div>
-                      <div className="flex items-center p-1 border-t border-b border-r">
-                        Cantidad
-                      </div>
-                      <div className="grid items-center grid-cols-3 px-4 border-t border-b">
-                        <button
-                          className="btn btn-sm btn-primary"
-                          onClick={() =>
-                            dispatch(decrementQuantity(itemQuotation.id))
-                          }
-                        >
-                          <Minus size={25} />
-                        </button>
-                        <div className="flex items-center justify-center">
-                          {itemQuotation.item.quantity}
+                    <div className="flex justify-center">
+                      <div className="grid grid-cols-2 gap-0 mt-4 text-xl sm:mt-0 ">
+                        <h3 className="col-span-2 my-0 mt-1 text-center md:my-4">
+                          {itemQuotation.item.reference} |{" "}
+                          {itemQuotation.item.location}
+                        </h3>
+
+                        <div className="flex items-center p-1 border-t border-r">
+                          Dimesiones
                         </div>
-                        <button
-                          className="btn btn-outline btn-sm"
-                          onClick={() =>
-                            dispatch(incrementQuantity(itemQuotation.id))
-                          }
-                        >
-                          <Plus size={25} />
-                        </button>
+                        <div className="flex items-center p-1 border-t">
+                          {itemQuotation.item.width}mm x{" "}
+                          {itemQuotation.item.height}mm
+                        </div>
+
+                        <div className="flex items-center p-1 border-t border-r">
+                          Area
+                        </div>
+                        <div className="flex items-center p-1 border-t">
+                          {(itemQuotation.item.width / 1000) *
+                            (itemQuotation.item.height / 1000)}
+                          m²
+                        </div>
+                        <div className="flex items-center p-1 border-t border-r">
+                          Vidrio
+                        </div>
+                        <div className="flex items-center p-1 border-t">
+                          {itemQuotation.item.glassData?.attributes.nameUI}
+                        </div>
+                        <div className="flex items-center p-1 border-t border-r">
+                          Color
+                        </div>
+                        <div className="flex items-center p-1 border-t">
+                          Blanco
+                        </div>
+                        <div className="flex items-center p-1 border-t border-b border-r">
+                          Cantidad
+                        </div>
+                        <div className="grid items-center grid-cols-3 px-4 border-t border-b">
+                          <button
+                            className="btn btn-sm btn-primary"
+                            onClick={() =>
+                              dispatch(decrementQuantity(itemQuotation.id))
+                            }
+                          >
+                            <Minus size={25} />
+                          </button>
+                          <div className="flex items-center justify-center">
+                            {itemQuotation.item.quantity}
+                          </div>
+                          <button
+                            className="btn btn-outline btn-sm"
+                            onClick={() =>
+                              dispatch(incrementQuantity(itemQuotation.id))
+                            }
+                          >
+                            <Plus size={25} />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

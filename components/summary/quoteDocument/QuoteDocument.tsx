@@ -1,6 +1,10 @@
 "use client";
-import { ContactResponse } from "@/models/Contact/Contact.strapi";
-import { Printer } from "lucide-react";
+import { useAppDispatch } from "@/lib/hooks/use-store-hooks";
+import { clearContactInfo } from "@/lib/redux/features/contact/contactSlice";
+import { resetQuote } from "@/lib/redux/features/quoteDocument/quoteSlice";
+import { ContactAttributes } from "@/models/Contact/Contact.strapi";
+import { SingleStrapiResponse } from "@/models/strapi/Global.response";
+import { Printer, Trash } from "lucide-react";
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { QuoteBody } from "./QuoteBody";
@@ -10,7 +14,7 @@ import { QuoteHead } from "./QuoteHead";
 export const QuoteDocument = ({
   contactData,
 }: {
-  contactData: ContactResponse;
+  contactData: SingleStrapiResponse<ContactAttributes>;
 }) => {
   const subtotal = contactData.data.attributes.windowsQuote.reduce(
     (acc, item) => {
@@ -22,10 +26,8 @@ export const QuoteDocument = ({
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
     documentTitle: `Arqustik-Quote`,
-    onAfterPrint: () => {
-      // toast.success("Presupuesto generado correctamente.");
-    },
   });
+  const dispatch = useAppDispatch();
 
   return (
     <div
@@ -36,7 +38,6 @@ export const QuoteDocument = ({
         <button onClick={handlePrint} className="btn btn-outline">
           <Printer /> Imprimir
         </button>
-   
       </div>
       <QuoteHead
         fullName={contactData.data.attributes.fullName}
@@ -44,10 +45,7 @@ export const QuoteDocument = ({
         address={contactData.data.attributes.address}
         email={contactData.data.attributes.email}
       />
-      <QuoteBody
-        windowsQuote={contactData.data.attributes.windowsQuote}
-        subtotal={subtotal}
-      />
+      <QuoteBody contactIfo={contactData} subtotal={subtotal} />
       <QuoteFooter subtotal={subtotal} />
     </div>
   );

@@ -1,13 +1,14 @@
 import WindowDraw from "@/components/shared/models-windows-pvc/window-draw";
 import { currencyCOPFormatter } from "@/lib/utilities/currencyFormatter";
-import { ContactResponse } from "@/models/Contact/Contact.strapi";
+import { ContactAttributes } from "@/models/Contact/Contact.strapi";
 import { QuoteWindowCalculatedI } from "@/models/QuoteWindowCalculated/QuoteWindowCalculated.interface";
+import { SingleStrapiResponse } from "@/models/strapi/Global.response";
 
 export const QuoteBody = ({
-  windowsQuote,
+  contactIfo,
   subtotal,
 }: {
-  windowsQuote: ContactResponse["data"]["attributes"]["windowsQuote"];
+  contactIfo: SingleStrapiResponse<ContactAttributes>;
   subtotal: number;
 }) => {
   return (
@@ -15,7 +16,7 @@ export const QuoteBody = ({
       <div className="divider" />
       <div className="flex justify-center w-full">
         <div className="grid justify-center w-full grid-cols-1">
-          {windowsQuote.map((item, index) => {
+          {contactIfo.data.attributes.windowsQuote.map((item, index) => {
             return (
               <div key={item.id} className="">
                 <div className="relative mb-4 text-3xl font-thin text-center">
@@ -119,7 +120,7 @@ export const QuoteBody = ({
               </thead>
               <tbody>
                 {/* row 1 */}
-                {windowsQuote.map((item, index) => (
+                {contactIfo.data.attributes.windowsQuote.map((item, index) => (
                   <tr key={item.id}>
                     <td className="font-bold">{index + 1}</td>
                     <td>

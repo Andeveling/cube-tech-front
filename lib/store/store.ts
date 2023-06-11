@@ -4,12 +4,14 @@ import { apiSlice } from "../redux/services/api.service";
 import createWindowReducer from "../redux/features/createWindow/createWindowSlice";
 import quoteReducer from "../redux/features/quoteDocument/quoteSlice";
 import { createWrapper } from "next-redux-wrapper";
+import contactReducer from "../redux/features/contact/contactSlice";
 
 export function makeStore() {
   return configureStore({
     reducer: {
       quote: quoteReducer,
       createWindow: createWindowReducer,
+      contact: contactReducer,
       [apiSlice.reducerPath]: apiSlice.reducer,
     },
 

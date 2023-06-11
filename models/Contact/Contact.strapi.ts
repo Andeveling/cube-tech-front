@@ -1,16 +1,5 @@
-import { Meta } from "../strapi/Global.response";
 import { WindowModelsEnum } from "../windowPVC.model";
 import { ContactI } from "./Contact.type";
-
-export interface ContactResponse {
-  data: ContactData;
-  meta: Meta;
-}
-
-interface ContactData {
-  id: number;
-  attributes: ContactAttributes;
-}
 
 export interface ContactAttributes extends Omit<ContactI, "windowsQuote"> {
   createdAt: Date;

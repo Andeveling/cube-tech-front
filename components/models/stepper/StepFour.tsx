@@ -15,7 +15,7 @@ export const StepFour = () => {
     <div className="flex flex-col justify-center w-full">
       <Heading as="h3">Resumen</Heading>
 
-      <div className="grid max-w-lg grid-cols-2 mx-auto text-xl">
+      <div className="grid max-w-lg grid-cols-2 mx-auto text-lg md:text-xl ">
         <h3 className="col-span-2 my-2 text-center">
           {currentWindow.reference} | {currentWindow.location}
         </h3>

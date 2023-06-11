@@ -28,8 +28,8 @@ const initialState: InitialState = {
     modelId: "",
     reference: "V",
     location: "",
-    width: 0,
-    height: 0,
+    width: 1000,
+    height: 1000,
     glassData: null,
 
     quantity: 1,

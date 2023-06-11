@@ -24,14 +24,14 @@ export default async function SystemPage({ params: { modelId } }: Params) {
     <div className="container w-full h-full mx-auto">
       <Heading>Diseño</Heading>
       <p
-        className="mb-10 text-center text-gray-500 opacity-0 animate-fade-up md:text-2xl"
+        className="mb-2 text-center text-gray-500 opacity-0 md:mb-10 animate-fade-up md:text-2xl"
         style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
       >
-        Configura tu ventana.
+        Configura tu ventana paso a paso.
       </p>
-      <div className="grid justify-center w-full grid-cols-1 gap-4 p-2 xl:grid-cols-2 ">
+      <div className="grid justify-center w-full grid-cols-1 gap-4 p-2 xl:grid-cols-2">
         <Suspense fallback={<Loader />}>
-          <div className="flex">
+          <div className="flex min-w-[350px]">
             <WindowPVCDrawStepper model={model?.data.attributes.draw_ref} />
           </div>
 
