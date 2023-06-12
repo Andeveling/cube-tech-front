@@ -24,7 +24,8 @@ export default function ContactPage() {
   const [createContact, { isLoading, isSuccess, data: contactData }] =
     useCreateContactMutation();
 
-  const [sendEmail, { error: EmailError,isLoading: EmailLoading }] = useSendMailMutation();
+  const [sendEmail, { error: EmailError, isLoading: EmailLoading }] =
+    useSendMailMutation();
   const dispatch = useAppDispatch();
   const router = useRouter();
   const {
@@ -59,7 +60,8 @@ export default function ContactPage() {
 
   useEffect(() => {
     if (quote.length === 0 && !contactData) router.push("/");
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [quote]);
 
   if (isSuccess && contactData)
     return <QuoteDocument contactData={contactData} />;
@@ -151,7 +153,11 @@ export default function ContactPage() {
             <label className=" label">
               <span className="label-text">
                 Estoy de acuerdo con los{" "}
-                <Link href="/terms-and-conditions" target='_blank' className="text-info">
+                <Link
+                  href="/terms-and-conditions"
+                  target="_blank"
+                  className="text-info"
+                >
                   Términos y condiciones
                 </Link>{" "}
                 de Arqustik SAS
