@@ -50,6 +50,7 @@ export default function ContactPage() {
     await toast.promise(
       createContact(data).then(async (res) => {
         await sendEmail(res);
+        dispatch(resetQuote());
       }),
       {
         loading: "Creando...",
@@ -57,7 +58,7 @@ export default function ContactPage() {
         error: <b>No se pudo crear la cotización</b>,
       },
     );
-    dispatch(resetQuote());
+    
   };
 
   useEffect(() => {

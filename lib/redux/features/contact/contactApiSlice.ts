@@ -1,3 +1,4 @@
+import { NEXT_PUBLIC_SERVER } from "@/lib/constants";
 import { ContactAttributes } from "@/models/Contact/Contact.strapi";
 import { SingleStrapiResponse } from "@/models/strapi/Global.response";
 import { apiSlice } from "../../services/api.service";
@@ -9,7 +10,7 @@ export const contactApiSlice = apiSlice.injectEndpoints({
       any
     >({
       query: (contactBody) => ({
-        url: "/api/contact/create-contact",
+        url: `/api/contact/create-contact`,
         method: "POST",
         body: contactBody,
       }),

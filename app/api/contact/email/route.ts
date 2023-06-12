@@ -2037,7 +2037,7 @@ export async function POST(request: Request) {
 </html>
 `;
 
-  const mailSend = await transporter.sendMail({
+  await transporter.sendMail({
     ...mailOptions,
     subject: "Arqustik Presupuesto",
     html: htmlEmail,
