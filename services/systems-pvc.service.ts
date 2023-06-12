@@ -11,8 +11,7 @@ import { GlazingBeadGlassAttributes } from "@/models/Item/GlazingBead/GlazingBea
 export const getSystemsPVC = async () => {
   const path = `/system-pvcs`;
   const response: Promise<CollectionStrapiResponse<SystemAttributesT>> =
-    await fetchAPI(path);
-
+  await fetchAPI(path);
   return response;
 };
 

@@ -72,15 +72,13 @@ export const StepOneLocation = ({ modelId, systemName, model }: Props) => {
               className="select select-bordered"
               {...register("location")}
             >
-              {locations
-                .filter((item) => item.location !== location)
-                .map((item) => {
-                  return (
-                    <option key={item.id} value={item.location}>
-                      {item.location}
-                    </option>
-                  );
-                })}
+              {locations.map((item) => {
+                return (
+                  <option key={item.id} value={item.location}>
+                    {item.location}
+                  </option>
+                );
+              })}
             </select>
 
             <p className="mt-6 text-lg text-left">
