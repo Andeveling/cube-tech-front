@@ -61,7 +61,7 @@ export default function ContactPage() {
   useEffect(() => {
     if (quote.length === 0 && !contactData) router.push("/");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [quote]);
+  }, []);
 
   if (isSuccess && contactData)
     return <QuoteDocument contactData={contactData} />;
