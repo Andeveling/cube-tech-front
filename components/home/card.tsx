@@ -1,9 +1,5 @@
-import { arqustikConfig } from "@/lib/constants";
-import { SystemI } from "@/models/System-PVC/SystemPVC.strapi";
-import Link from "next/link";
-import ReactMarkdown from "react-markdown";
-import Balancer from "react-wrap-balancer";
 import Image from "next/image";
+import Link from "next/link";
 import Heading from "../shared/heading";
 
 interface Props {

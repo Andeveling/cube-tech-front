@@ -1,10 +1,7 @@
 import { fetchAPI } from "@/lib/utils";
 import { GlassCategoriesAttributes } from "@/models/GlassCategories/GlassCategory.strapi";
-import {
-  CollectionStrapiResponse,
-  SingleStrapiResponse,
-} from "@/models/strapi/Global.response";
-import axios from "axios";
+import { CollectionStrapiResponse } from "@/models/strapi/Global.response";
+
 import { GlassAdapter } from "../models/Item/Glass/Glass.adapter";
 
 export const getGlassesCategories = async () => {
@@ -20,15 +17,4 @@ export const getGlassesCategories = async () => {
     CollectionStrapiResponse<GlassCategoriesAttributes>
   > = await fetchAPI(path, urlParams);
   return responseData;
-};
-
-export const getGlassById = async (id: number | string) => {
-  try {
-    const response = await axios.get(`http://localhost:1337/api/glasses/${id}`);
-    const data = response.data;
-    const glassAdapted = GlassAdapter(data);
-    return glassAdapted;
-  } catch (error) {
-    throw error;
-  }
 };
