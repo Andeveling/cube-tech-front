@@ -23,7 +23,7 @@ type Props = {
 
 export default async function RootLayout({ children }: Props) {
   return (
-    <html lang="en" data-theme="lofi">
+    <html lang="es" data-theme="lofi">
       <body className={cx(sfPro.variable, inter.variable)}>
         <Providers>
           {/* <div className="fixed w-full h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-100" /> */}

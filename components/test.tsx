@@ -1,19 +1,21 @@
-const TestGrid = () => {
+"use client";
+
+import { useSendMailMutation } from "@/lib/redux/features/contact/contactApiSlice";
+
+const TestButtonEmail = () => {
+  const [sendEmail] = useSendMailMutation();
+
   return (
-    <div className="grid grid-cols-4 gap-4 mt-12 bg-primary">
-      <div className="w-full h-full col-span-2 col-start-1 col-end-3 row-span-2 bg-info"></div>
-      <div className=" bg-info w-52 h-52"></div>
-      <div className=" bg-info w-52 h-52"></div>
-      <div className=" bg-info w-52 h-52"></div>
-      <div className=" bg-info w-52 h-52"></div>
-      <div className=" bg-info w-52 h-52"></div>
-      <div className=" bg-info w-52 h-52"></div>
-      <div className=" bg-info w-52 h-52"></div>
-      <div className=" bg-info w-52 h-52"></div>
-      <div className=" bg-info w-52 h-52"></div>
-      <div className=" bg-info w-52 h-52"></div>
-      <div className=" bg-info w-52 h-52"></div>
+    <div>
+      <button
+        className="btn btn-outline"
+        onClick={async () => {
+          await sendEmail({ fullName: "andres" });
+        }}
+      >
+        test mail
+      </button>
     </div>
   );
 };
-export default TestGrid;
+export default TestButtonEmail;

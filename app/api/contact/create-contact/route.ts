@@ -12,44 +12,27 @@ interface RequestBody {
 }
 
 export async function POST(request: Request) {
-  try {
-    const { contact }: Partial<RequestBody> = await request.json();
-    if (!contact)
-      return NextResponse.json({ message: "Los datos no estan completos" });
-    if (contact.windowsQuote.length === 0 || !contact.windowsQuote)
-      return NextResponse.json({ message: "No tienes ventanas en la lista" });
-    const { windowsQuote, fullName, cellphone, email, address } = contact;
+  const { contact }: Partial<RequestBody> = await request.json();
+  if (!contact)
+    return NextResponse.json({ message: "Los datos no estan completos" });
+  if (contact.windowsQuote.length === 0 || !contact.windowsQuote)
+    return NextResponse.json({ message: "No tienes ventanas en la lista" });
+  const { windowsQuote, fullName, cellphone, email, address } = contact;
 
-    const adminRules: AdminRules = await getAdminRules();
-    const allWindowsCalculated = await Promise.all(
-      windowsQuote.map((itemQuote) =>
-        calculateWindowCost(itemQuote, adminRules),
-      ),
-    ).catch((error) => console.error(error));
+  const adminRules: AdminRules = await getAdminRules();
+  const allWindowsCalculated = await Promise.all(
+    windowsQuote.map((itemQuote) => calculateWindowCost(itemQuote, adminRules)),
+  ).catch((error) => console.error(error));
 
-    const contactBody = {
-      data: {
-        fullName,
-        cellphone,
-        email,
-        address,
-        windowsQuote: allWindowsCalculated as QuoteWindowCalculatedI[],
-      },
-    };
-
-    const newContact = await createContact(contactBody);
-
-    /* Generar PDF */
-
-    /* Enviar mail */
-  
-
-
-
-
-
-    return NextResponse.json(newContact);
-  } catch (error) {
-    return NextResponse.json(error);
-  }
+  const contactBody = {
+    data: {
+      fullName,
+      cellphone,
+      email,
+      address,
+      windowsQuote: allWindowsCalculated as QuoteWindowCalculatedI[],
+    },
+  };
+  const newContact = await createContact(contactBody);
+  return NextResponse.json(newContact);
 }

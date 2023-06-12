@@ -23,7 +23,7 @@ export const WindowPVCDrawStepper = ({
       )}
       <div className="relative  md:mb-0 mb-4 border border-gray-300 shadow-md md:h-[500px] md:w-[500px] h-[350px] w-[350px]">
         {glassData && (
-          <div className="absolute z-10 top-6 left-4 badge badge-primary">
+          <div className="absolute bottom-0 left-0 z-10 font-semibold badge badge-info badge-lg">
             Cristal: {glassData.attributes.nameUI}
           </div>
         )}

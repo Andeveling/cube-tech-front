@@ -1,4 +1,5 @@
 import Card from "@/components/home/card";
+import TestButtonEmail from "@/components/test";
 import Balancer from "react-wrap-balancer";
 import { getSystemsPVC } from "services/systems-pvc.service";
 
@@ -32,6 +33,7 @@ export default async function Home() {
           />
         ))}
       </div>
+      <TestButtonEmail />
     </div>
   );
 }

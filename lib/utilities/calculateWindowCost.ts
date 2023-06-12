@@ -40,7 +40,6 @@ export const calculateWindowCost = async (
     const glassName = glazingBeadAndGlass.glass?.name;
     const usdCop = adminRules.TRM;
     const utility = adminRules.utility;
-
     const baseWindow = new WindowPVC(
       id,
       reference,

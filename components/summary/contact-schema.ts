@@ -11,7 +11,7 @@ export const CreateContactSchemaZ = z.object({
   email: z.string().email(),
   terms: z.literal(true, {
     errorMap: () => ({
-      message: "*Debes aceptar nuestros terminos y condiciones",
+      message: "*Debes aceptar nuestros términos y condiciones",
     }),
   }),
 });

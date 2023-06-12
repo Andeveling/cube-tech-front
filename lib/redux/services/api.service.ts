@@ -3,7 +3,7 @@ import { HYDRATE } from "next-redux-wrapper";
 
 
 export const apiSlice = createApi({
-  reducerPath: "Strapi Server",
+  reducerPath: "RTK-Query",
   baseQuery: fetchBaseQuery({ baseUrl: "" }),
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {

@@ -3,7 +3,10 @@ import Heading from "@/components/shared/heading";
 import { CreateContactSchemaZ } from "@/components/summary/contact-schema";
 import { QuoteDocument } from "@/components/summary/quoteDocument/QuoteDocument";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/use-store-hooks";
-import { useCreateContactMutation } from "@/lib/redux/features/contact/contactApiSlice";
+import {
+  useCreateContactMutation,
+  useSendMailMutation,
+} from "@/lib/redux/features/contact/contactApiSlice";
 import {
   resetQuote,
   selectQuoteItems,
@@ -20,6 +23,8 @@ export default function ContactPage() {
   const quote = useAppSelector(selectQuoteItems);
   const [createContact, { isLoading, isSuccess, data: contactData }] =
     useCreateContactMutation();
+
+  const [sendEmail, { error: EmailError,isLoading: EmailLoading }] = useSendMailMutation();
   const dispatch = useAppDispatch();
   const router = useRouter();
   const {
@@ -41,11 +46,14 @@ export default function ContactPage() {
     const data = {
       contact: { fullName, cellphone, email, address, windowsQuote: quote },
     };
-    await toast.promise(createContact(data), {
-      loading: "Creando...",
-      success: <b>¡Cotización creada!</b>,
-      error: <b>No se pudo crear la cotización</b>,
-    });
+    await toast.promise(
+      createContact(data).then(async (res) => await sendEmail(res)),
+      {
+        loading: "Creando...",
+        success: <b>¡Cotización creada!</b>,
+        error: <b>No se pudo crear la cotización</b>,
+      },
+    );
     dispatch(resetQuote());
   };
 
@@ -143,7 +151,7 @@ export default function ContactPage() {
             <label className=" label">
               <span className="label-text">
                 Estoy de acuerdo con los{" "}
-                <Link href="/terms-and-conditions" className="text-info">
+                <Link href="/terms-and-conditions" target='_blank' className="text-info">
                   Términos y condiciones
                 </Link>{" "}
                 de Arqustik SAS

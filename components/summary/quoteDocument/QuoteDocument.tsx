@@ -1,10 +1,7 @@
 "use client";
-import { useAppDispatch } from "@/lib/hooks/use-store-hooks";
-import { clearContactInfo } from "@/lib/redux/features/contact/contactSlice";
-import { resetQuote } from "@/lib/redux/features/quoteDocument/quoteSlice";
 import { ContactAttributes } from "@/models/Contact/Contact.strapi";
 import { SingleStrapiResponse } from "@/models/strapi/Global.response";
-import { Printer, Trash } from "lucide-react";
+import { Printer } from "lucide-react";
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { QuoteBody } from "./QuoteBody";
@@ -27,7 +24,6 @@ export const QuoteDocument = ({
     content: () => componentRef.current,
     documentTitle: `Arqustik-Quote`,
   });
-  const dispatch = useAppDispatch();
 
   return (
     <div

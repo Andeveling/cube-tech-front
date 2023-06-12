@@ -13,10 +13,18 @@ export const contactApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: contactBody,
       }),
-
       invalidatesTags: ["Contacts"],
+    }),
+
+    sendMail: builder.mutation({
+      query: (body) => ({
+        url: "/api/contact/email",
+        method: "POST",
+        body: body,
+      }),
     }),
   }),
 });
 
-export const { useCreateContactMutation } = contactApiSlice;
+export const { useCreateContactMutation, useSendMailMutation } =
+  contactApiSlice;
