@@ -48,7 +48,9 @@ export default function ContactPage() {
       contact: { fullName, cellphone, email, address, windowsQuote: quote },
     };
     await toast.promise(
-      createContact(data).then(async (res) => await sendEmail(res)),
+      createContact(data).then(async (res) => {
+        await sendEmail(res);
+      }),
       {
         loading: "Creando...",
         success: <b>¡Cotización creada!</b>,
