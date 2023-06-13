@@ -50,7 +50,7 @@ export default function ContactPage() {
     await toast.promise(
       createContact(data).then(async (res) => {
         await sendEmail(res);
-        dispatch(resetQuote());
+        // dispatch(resetQuote());
       }),
       {
         loading: "Creando...",

@@ -33,6 +33,7 @@ export async function POST(request: Request) {
       windowsQuote: allWindowsCalculated as QuoteWindowCalculatedI[],
     },
   };
+
   const newContact = await createContact(contactBody);
   return NextResponse.json(newContact);
 }
