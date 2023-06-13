@@ -35,5 +35,12 @@ export async function POST(request: Request) {
   };
 
   const newContact = await createContact(contactBody);
-  return NextResponse.json(newContact);
+  return NextResponse.json(newContact, {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  });
 }
