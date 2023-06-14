@@ -1,6 +1,5 @@
 import { SingleStrapiResponse } from "@/models/strapi/Global.response";
 import { Glass } from "../Glass/Glass.model";
-import { ID } from "../Item.model";
 import { Profile } from "../Profiles/Profile.model";
 import { GlazingBeadGlassCaliber } from "./GlazingBeadGlassCaliber.class";
 import { GlazingBeadGlassAttributes } from "./GlazingBeadGlassCaliber.strapi";

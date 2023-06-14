@@ -11,7 +11,7 @@ import { GlazingBeadGlassAttributes } from "@/models/Item/GlazingBead/GlazingBea
 export const getSystemsPVC = async () => {
   const path = `/system-pvcs`;
   const response: Promise<CollectionStrapiResponse<SystemAttributesT>> =
-  await fetchAPI(path);
+    await fetchAPI(path);
   return response;
 };
 
@@ -26,10 +26,14 @@ export const getSystemWithModelsPVC = async (systemId: ID) => {
   return responseData;
 };
 
-export const getGlassGlazingDeep = async (id: ID) => {
+export const getGlassGlazingCaliber = async (id: ID) => {
   const path = `/glass-glazing-bead-systems/${id}`;
   const urlParams = {
-    populate: "deep",
+    populate: {
+      glass: "glass",
+      glass_caliber: "glass_caliber",
+      glazing_bead_profile: "glazing_bead_profile",
+    },
   };
   const response: Promise<SingleStrapiResponse<GlazingBeadGlassAttributes>> =
     await fetchAPI(path, urlParams);

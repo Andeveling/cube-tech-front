@@ -17,6 +17,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Los datos no estan completos" });
   if (contact.windowsQuote.length === 0 || !contact.windowsQuote)
     return NextResponse.json({ message: "No tienes ventanas en la lista" });
+  
   const { windowsQuote, fullName, cellphone, email, address } = contact;
 
   const adminRules: AdminRules = await getAdminRules();

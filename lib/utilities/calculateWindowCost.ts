@@ -4,7 +4,7 @@ import { EverestMaxFactory } from "@/models/factories/EverestMax/EverestMaxFacto
 import { SystemsAvailableEnum } from "@/models/System-PVC/SystemPVC.interface";
 import { WindowModelsEnum } from "@/models/windowPVC.model";
 import { WindowPVC } from "@/models/WindowPVC/WindowPVC.model";
-import { getGlassGlazingDeep } from "@/services/systems-pvc.service";
+import { getGlassGlazingCaliber } from "@/services/systems-pvc.service";
 import { getModelWindowPVCAdapted } from "@/services/windowModel.service";
 import { QuoteItemI } from "../redux/features/quoteDocument/quoteSlice";
 
@@ -32,7 +32,7 @@ export const calculateWindowCost = async (
     if (!glassData) throw new Error("Codigo de Cristal invalido");
     const glassAndGlazingBeadId =
       glassData.attributes.glass_glazing_bead_system.data.id;
-    const glazingBeadAndGlass = await getGlassGlazingDeep(
+    const glazingBeadAndGlass = await getGlassGlazingCaliber(
       glassAndGlazingBeadId,
     );
     const windowModel = await getModelWindowPVCAdapted(modelId);

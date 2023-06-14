@@ -1,6 +1,6 @@
 import { StepFour } from "@/components/models/stepper/StepFour";
 import { StepOneLocation } from "@/components/models/stepper/StepOneLocation";
-import StepperProvider from "@/components/models/stepper/StepperContext";
+
 import { StepThreeSetGlass } from "@/components/models/stepper/StepThreeSetGlass";
 import { StepTwoDimensions } from "@/components/models/stepper/StepTwoDimensions";
 import { WindowCreateStepper } from "@/components/models/stepper/WindowCreateStepper";
@@ -11,6 +11,7 @@ import { getGlassesCategories } from "@/services/glass.service";
 import { getModelWindowPVC } from "@/services/windowModel.service";
 import { v4 as uuid } from "uuid";
 import Loader from "@/components/shared/Loader";
+import StepperProvider from "@/components/models/stepper/StepperContext";
 
 type Params = { params: { modelId: string } };
 

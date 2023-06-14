@@ -1,11 +1,11 @@
 import { fetchAPI } from "@/lib/utils";
 import { AdminRulesAdapted } from "@/models/AdminRules/AdminRules.adapter";
 import { AdminRulesAttributes } from "@/models/AdminRules/AdminRules.strapi";
-import { Meta, SingleStrapiResponse } from "@/models/strapi/Global.response";
+import { SingleStrapiResponse } from "@/models/strapi/Global.response";
 
 export const getAdminRules = async () => {
   const path = `/admin-rule`;
-  const response: Promise<SingleStrapiResponse<AdminRulesAttributes>> =
+  const response: Awaited<Promise<SingleStrapiResponse<AdminRulesAttributes>>> =
     await fetchAPI(path);
   const responseData = await response;
 
