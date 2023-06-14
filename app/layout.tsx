@@ -31,7 +31,7 @@ export default async function RootLayout({ children }: Props) {
             {/* @ts-expect-error Server Component */}
             <Nav />
           </Suspense>
-          <main className="w-full min-h-screen py-32">{children}</main>
+          <main className="w-full min-h-screen py-32 ">{children}</main>
           <Footer />
           <Analytics />
         </Providers>
